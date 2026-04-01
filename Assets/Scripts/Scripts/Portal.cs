@@ -1,15 +1,6 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
-public class Portal : MonoBehaviour
+public abstract class Portal : MonoBehaviour
 {
-    public string sceneToLoad; // Set in Inspector e.g. "PastRoom"
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(sceneToLoad);
-        }
-    }
+    public abstract void Activate(GameObject player);
 }
