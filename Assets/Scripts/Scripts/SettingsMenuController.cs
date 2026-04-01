@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SettingsMenuController : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class SettingsMenuController : MonoBehaviour
         //menuItems.Add(raycastItem);
         //menuItems.Add(inventoryItem);
         //menuItems.Add(speedItem);
+        menuItems.Add(restartItem);
         menuItems.Add(quitItem);
 
         if (settingsMenuCanvas != null)
@@ -110,8 +112,9 @@ public class SettingsMenuController : MonoBehaviour
         }*/
 
         HandleNavigation();
-
-        if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("js10"))
+        
+        if(Input.GetKeyDown(KeyCode.M))
+        //if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("js10"))
             SelectCurrentItem();
     }
 
@@ -122,14 +125,16 @@ public class SettingsMenuController : MonoBehaviour
         if (joystickCooldown > 0f) return;
 
         // UpArrow or joystick up → move up
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("js0"))
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        //if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("js0"))
         {
             currentIndex = (currentIndex - 1 + menuItems.Count) % menuItems.Count;
             UpdateHighlight();
             joystickCooldown = JOYSTICK_DELAY;
         }
         // DownArrow or joystick down → move down
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("js3"))
+        else if(Input.GetKeyDown(KeyCode.DownArrow))
+        //else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("js3"))
         {
             currentIndex = (currentIndex + 1) % menuItems.Count;
             UpdateHighlight();
@@ -179,6 +184,7 @@ public class SettingsMenuController : MonoBehaviour
         {
             case "ResumeItem": ActionResume(); break;
             case "RaycastItem": ActionRaycast(); break;
+            case "RestartItem": ActionRestart(); break;
             case "InventoryItem": ActionInventory(); break;
             case "SpeedItem": ActionSpeed(); break;
             case "QuitItem": ActionQuit(); break;
@@ -213,6 +219,14 @@ public class SettingsMenuController : MonoBehaviour
         Debug.Log("[Settings] Inventory updated");
 
     }*/
+
+    void ActionRestart()
+    {
+        Debug.Log("[Settings] Restart");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CloseSettings();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
     void ActionInventory()
     {

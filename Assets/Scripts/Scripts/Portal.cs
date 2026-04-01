@@ -3,10 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    public string sceneToLoad; // Set in Inspector e.g. "PastRoom"
+    public string sceneToLoad = "pastroom";
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("PORTAL HIT BY: " + other.name);
         if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(sceneToLoad);

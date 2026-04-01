@@ -477,7 +477,8 @@ public class MenuController : MonoBehaviour
     void HandleInput()
     {
         // Y button / O key → context sensitive
-        if (Input.GetButtonDown("js5") || Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O))
+        //if (Input.GetButtonDown("js5") || Input.GetKeyDown(KeyCode.O))
          {
              Ray ray = new Ray(transform.position, transform.forward);
              RaycastHit hit;
@@ -493,8 +494,8 @@ public class MenuController : MonoBehaviour
                  }
              }
          }
-        
-        if (Input.GetButtonDown("js7") || Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
+        //if (Input.GetButtonDown("js7") || Input.GetKeyDown(KeyCode.Return))
         {
             if (settingsMenuController != null)
             {
@@ -508,11 +509,13 @@ public class MenuController : MonoBehaviour
             TryOpenMenu();*/
 
         // B / M → confirm Object Menu action
-        if (Input.GetButtonDown("js10") || Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.O))
+        //if (Input.GetButtonDown("js10") || Input.GetKeyDown(KeyCode.M))
             TryExecuteAction();
 
         // A / N → spawn last destroyed
-        if (Input.GetButtonDown("js11") || Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.O))
+        //if (Input.GetButtonDown("js11") || Input.GetKeyDown(KeyCode.N))
             TrySpawnLastDestroyed();
     }
 
