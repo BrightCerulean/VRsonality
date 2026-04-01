@@ -1,0 +1,23 @@
+
+Complete Controller Button Reference
+
+| Button    | Code | When                               | Action |
+|--------   |------|------                              |--------|
+| **Y**     | js5  | Pointing at interactable object    | Open Object Menu |
+| **Y**     | js5  | Pointing at ground/anything else   | Teleport to that location |
+| **B**     | js10 | No menu open                       | Nothing |
+| **B**     | js10 | Object Menu open, hovering button  | Confirm action (Destroy/Store/Exit) |
+| **B**     | js10 | Settings Menu open                 | Select highlighted item (Resume/Raycast/Inventory/Speed/Quit) |
+| **B**     | js10 | Inventory Panel open               | Grab highlighted object |
+| **A**     | js11 | Normal gameplay                    | Spawn last destroyed object at ground |
+| **A**     | js11 | Inventory Panel open               | Close inventory, go back to Settings |
+| **OK**    | js7  | Normal gameplay                    | Open Settings Menu |
+| **OK**    | js7  | Settings Menu open                 | Close Settings Menu |
+| **OK**    | js7  | Inventory Panel open               | Close inventory, go back to Settings |
+| **Up**    | js0  | Settings Menu open                 | Navigate up |
+| **Up**    | js0  | Inventory Panel open               | Navigate up through tiles |
+| **Down**  | js3  | Settings Menu open                 | Navigate down |
+| **Down**  | js3  | Inventory Panel open               | Navigate down through tiles |
+
+Button X on the controller was replaced by Y during implementation as the controller was not working properly. 
+Unfortunately, I could not implement the character teleporting to the location of an object since I used up Y for opening the Object Menu, while it is pointing at an object. 
