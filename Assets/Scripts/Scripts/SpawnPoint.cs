@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpawnPoint : MonoBehavior
+public class SpawnPoint : MonoBehaviour
 {
-	public string spawnID
+	public string spawnID;
 }
