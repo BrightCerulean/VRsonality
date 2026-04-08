@@ -122,7 +122,7 @@ public class RayCast : MonoBehaviour
         RaycastHit hit;
 
         int layerMask = ~LayerMask.GetMask("Character");
-        Debug.Log("LayerMask value: " + layerMask);
+        //Debug.Log("LayerMask value: " + layerMask);
         if (Physics.Raycast(origin, direction, out hit, maxDistance, layerMask))
         {
             lineRenderer.SetPosition(0, origin);
