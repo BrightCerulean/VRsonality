@@ -20,7 +20,7 @@ public class CharacterMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         //Get horizontal and Vertical movements
         float horComp = Input.GetAxis("Horizontal");
         float vertComp = Input.GetAxis("Vertical");
