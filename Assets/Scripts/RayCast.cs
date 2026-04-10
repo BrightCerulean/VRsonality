@@ -92,8 +92,9 @@ public class RayCast : MonoBehaviour
     public float maxDistance = 50f;
     public GameObject hitDot;
     public MenuController menuController;
+    private Interactable currentHover;
 
-    private OutlineHighlight currentOutline;
+    //private OutlineHighlight currentOutline;
 
     void Start()
     {
@@ -112,7 +113,7 @@ public class RayCast : MonoBehaviour
 
     void Update()
     {
-        if (menuController != null) 
+        if (menuController != null)
         {
             maxDistance = menuController.raycastDistance;
         }
@@ -122,34 +123,18 @@ public class RayCast : MonoBehaviour
         RaycastHit hit;
 
         int layerMask = ~LayerMask.GetMask("Character");
-        Debug.Log("LayerMask value: " + layerMask);
-        if (Physics.Raycast(origin, direction, out hit, maxDistance, layerMask))
+        bool didHit = Physics.Raycast(origin, direction, out hit, maxDistance, layerMask);
+        //Debug.Log("LayerMask value: " + layerMask);
+        if (didHit)
         {
             lineRenderer.SetPosition(0, origin);
             lineRenderer.SetPosition(1, hit.point);
 
             // Show hit dot
-            if (hitDot != null) hitDot.SetActive(true);
-            if (hitDot != null) hitDot.transform.position = hit.point;
-
-            //Debug.Log("Hit: " + hit.collider.gameObject.name);
-
-            // Outline highlight
-            OutlineHighlight newOutline = hit.collider.GetComponent<OutlineHighlight>();
-            if (currentOutline != newOutline)
+            if (hitDot != null)
             {
-                if (currentOutline != null) currentOutline.enabled = false;
-                if (newOutline != null) newOutline.enabled = true;
-                currentOutline = newOutline;
-            }
-
-            // Teleport
-            Teleporting teleporting = hit.collider.GetComponent<Teleporting>();
-            if (teleporting != null)
-            {
-                // teleporting.TeleportTo(hit.point);
-                bool isInteractable = hit.collider.GetComponent<ObjectMenu>() != null;
-                teleporting.TeleportTo(hit.point, isInteractable);
+                hitDot.SetActive(true);
+                hitDot.transform.position = hit.point;
             }
         }
         else
@@ -157,13 +142,45 @@ public class RayCast : MonoBehaviour
             lineRenderer.SetPosition(0, origin);
             lineRenderer.SetPosition(1, origin + direction * maxDistance);
 
-            // Hide hit dot
-            if (hitDot != null) hitDot.SetActive(false);
+            if (hitDot != null)
+                hitDot.SetActive(false);
+        }
+        Interactable newHover = didHit ? hit.collider.GetComponent<Interactable>() : null;
+        //Hover
+        if (newHover != currentHover)
+        {
+            if (currentHover != null)
+                currentHover.SetHover(false);
 
-            if (currentOutline != null)
+            currentHover = newHover;
+
+            if (currentHover != null)
+                currentHover.SetHover(true);
+        }
+        //Select
+        if (Input.GetButtonDown("js3"))
+        {
+            if (currentHover != null)
             {
-                currentOutline.enabled = false;
-                currentOutline = null;
+                currentHover.Select();
+
+                Interactable[] all = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
+
+                foreach (var obj in all)
+                {
+                    if (obj != currentHover)
+                        obj.Lock();
+                }
+            }
+        }
+        //Teleport
+        if (didHit)
+        {
+            Teleporting teleporting = hit.collider.GetComponent<Teleporting>();
+            if (teleporting != null)
+            {
+                bool isInteractable = hit.collider.GetComponent<ObjectMenu>() != null;
+                teleporting.TeleportTo(hit.point, isInteractable);
             }
         }
         for (int i = 0; i < 20; i++)

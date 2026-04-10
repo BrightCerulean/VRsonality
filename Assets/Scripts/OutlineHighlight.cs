@@ -10,7 +10,13 @@ public class OutlineHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExi
         outline = GetComponent<Outline>();
         outline.enabled = false;
     }
+    public void SetHover(bool state)
+    {
+        if (outline != null)
+            outline.enabled = state;
+    }
     // called by raycasting script when object is hit
+    /*
     void OnEnable()
     {
         if (outline != null)
@@ -22,6 +28,8 @@ public class OutlineHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (outline != null)
             outline.enabled = false;
     }
+    */
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         outline.enabled = true;
