@@ -4,10 +4,12 @@ public class MuseumManager : MonoBehaviour
 {
     [Header("Portals")]
     public GameObject portalToUpload;
+    public GameObject portalToPresent;
     public GameObject portalToResults;
 
     [Header("Door Highlights")]
     public GameObject pastDoorHighlight;
+    public GameObject presentDoorHighlight;
     public GameObject resultsDoorHighlight;
 
     void Start()
@@ -24,23 +26,22 @@ public class MuseumManager : MonoBehaviour
     public void UpdateDoors()
     {
         if (GameManager.Instance == null) return;
-
         int count = GameManager.Instance.GetSelectionCount();
 
-        // Past portal always active
-        if (portalToUpload != null)
-            portalToUpload.SetActive(true);
-        if (pastDoorHighlight != null)
-            pastDoorHighlight.SetActive(true);
+        // Past — always active
+        if (portalToUpload != null) portalToUpload.SetActive(true);
+        if (pastDoorHighlight != null) pastDoorHighlight.SetActive(true);
 
-        // Results portal only after Q1 + Q2
-        bool done = count >= 2;
-        if (portalToResults != null)
-            portalToResults.SetActive(done);
-        if (resultsDoorHighlight != null)
-            resultsDoorHighlight.SetActive(done);
+        // Present — after Q1 + Q2
+        bool presentDone = count >= 2;
+        if (portalToPresent != null) portalToPresent.SetActive(presentDone);
+        if (presentDoorHighlight != null) presentDoorHighlight.SetActive(presentDone);
 
-        Debug.Log("[Museum] Count: " + count + 
-            " | Results active: " + done);
+        // Results — after all 4
+        bool allDone = count >= 4;
+        if (portalToResults != null) portalToResults.SetActive(allDone);
+        if (resultsDoorHighlight != null) resultsDoorHighlight.SetActive(allDone);
+
+        Debug.Log("[Museum] Count: " + count + " | Present: " + presentDone + " | Results: " + allDone);
     }
 }

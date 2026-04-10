@@ -23,6 +23,13 @@ public class ColorSelector : MonoBehaviour
             selector.transform.position = selector.originalPosition;
         }
 
+        // Disable all other orbs
+        foreach (var selector in FindObjectsByType<ColorSelector>(FindObjectsSortMode.None))
+        {
+            if (selector != this)
+                selector.gameObject.SetActive(false);
+        }
+
         // Select this one
         isSelected = true;
         transform.position = originalPosition + Vector3.up * 0.3f;
