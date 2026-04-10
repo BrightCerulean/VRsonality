@@ -6,11 +6,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public Color playerColor = Color.white;
     public string playerColorName = "None";
-    // 1 = past, 2 = present
-    public int currentQuestionSet = 1; 
+    public int currentQuestionSet = 1; // 1 = past, 2 = present
 
+    public static readonly string Scene1 = "toddlerbedroom";
+    public static readonly string Scene2 = "playground";
+    public static readonly string Scene3 = "partyroom";
+    public static readonly string Scene4 = "adultbedroom";
 
-    private Dictionary<string, string> selections = 
+    private Dictionary<string, string> selections =
         new Dictionary<string, string>();
 
     void Awake()
@@ -31,8 +34,20 @@ public class GameManager : MonoBehaviour
         if (!selections.ContainsKey(sceneName))
         {
             selections[sceneName] = letter;
-            Debug.Log("[GameManager] Scene: " + sceneName + 
+            Debug.Log("[GameManager] Scene: " + sceneName +
                 " → Letter: " + letter);
+        }
+    }
+
+    private string LetterToArchetype(string letter)
+    {
+        switch (letter)
+        {
+            case "H": return "The Hero";
+            case "C": return "The Caregiver";
+            case "E": return "The Explorer";
+            case "S": return "The Sage";
+            default: return "The Hero";
         }
     }
 
@@ -47,25 +62,17 @@ public class GameManager : MonoBehaviour
             if (counts.ContainsKey(pair.Value))
                 counts[pair.Value]++;
 
-        string dominant = "H";
         int highest = 0;
         foreach (var pair in counts)
-        {
-            if (pair.Value > highest)
-            {
-                highest = pair.Value;
-                dominant = pair.Key;
-            }
-        }
+            if (pair.Value > highest) highest = pair.Value;
 
-        switch (dominant)
-        {
-            case "H": return "The Hero";
-            case "C": return "The Caregiver";
-            case "E": return "The Explorer";
-            case "S": return "The Sage";
-            default: return "The Hero";
-        }
+        // Tiebreaker priority: Caregiver → Hero → Explorer → Sage
+        string[] priority = { "C", "H", "E", "S" };
+        foreach (string letter in priority)
+            if (counts[letter] == highest)
+                return LetterToArchetype(letter);
+
+        return "The Hero";
     }
 
     public string GetDescription()
@@ -111,6 +118,7 @@ public class GameManager : MonoBehaviour
         selections.Clear();
         Debug.Log("[GameManager] Reset");
     }
+
     public void SetPlayerColor(Color color, string colorName)
     {
         playerColor = color;
