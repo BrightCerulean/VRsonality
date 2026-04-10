@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public Color playerColor = Color.white;
     public string playerColorName = "None";
+    // 1 = past, 2 = present
+    public int currentQuestionSet = 1; 
+
 
     private Dictionary<string, string> selections = 
         new Dictionary<string, string>();
