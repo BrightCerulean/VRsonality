@@ -1,88 +1,3 @@
-/*
-using UnityEngine;
-
-public class RayCast : MonoBehaviour
-{
-    private LineRenderer lineRenderer;
-    private Camera mainCamera;
-    public float maxDistance = 50f;
-    public GameObject hitDot;
-
-    private OutlineHighlight currentOutline; // track current object
-
-    void Start()
-    {
-        lineRenderer = GetComponent<LineRenderer>();
-        mainCamera = Camera.main;
-
-        if (lineRenderer != null)
-        {
-            lineRenderer.positionCount = 2;
-        }
-        else
-        {
-            Debug.LogError("LineRenderer missing!");
-        }
-    }
-
-    void Update()
-    {
-        Vector3 origin = mainCamera.transform.position;
-        Vector3 direction = mainCamera.transform.forward;
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(origin, direction, out hit, maxDistance))
-        {
-            lineRenderer.SetPosition(0, origin);
-            lineRenderer.SetPosition(1, hit.point);
-
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
-
-            OutlineHighlight newOutline = hit.collider.GetComponent<OutlineHighlight>();
-
-            // check for object hit and enable outline
-            if (currentOutline != newOutline)
-            {
-                if (currentOutline != null)
-                {
-                    currentOutline.enabled = false;
-                }
-
-                if (newOutline != null)
-                {
-                    newOutline.enabled = true;
-                }
-
-                currentOutline = newOutline;
-            }
-            if (hitDot != null) hitDot.SetActive(true);
-            if (hitDot != null) hitDot.transform.position = hit.point;
-        }
-        else
-        {
-            lineRenderer.SetPosition(0, origin);
-            lineRenderer.SetPosition(1, origin + direction * maxDistance);
-
-           
-            if (currentOutline != null)
-            {
-                currentOutline.enabled = false;
-                currentOutline = null;
-            }
-            if (hitDot != null) hitDot.SetActive(false);
-        }
-        Teleporting teleporting = hit.collider.GetComponent<Teleporting>();
-        if (teleporting != null)
-            {
-                teleporting.TeleportTo(hit.point);
-            }
-    }
-        
-}
-
-*/
-
 using UnityEngine;
 
 public class RayCast : MonoBehaviour
@@ -92,17 +7,18 @@ public class RayCast : MonoBehaviour
     public float maxDistance = 50f;
     public GameObject hitDot;
     public MenuController menuController;
-
-    private OutlineHighlight currentOutline;
+    private HoverHighlight currentHighlight;
 
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
         mainCamera = Camera.main;
+        lineRenderer = GetComponent<LineRenderer>();
 
         if (lineRenderer != null)
         {
             lineRenderer.positionCount = 2;
+            lineRenderer.startWidth = 0.01f;
+            lineRenderer.endWidth = 0.01f;
         }
         else
         {
@@ -112,44 +28,83 @@ public class RayCast : MonoBehaviour
 
     void Update()
     {
-        if (menuController != null) 
-        {
+        if (menuController != null)
             maxDistance = menuController.raycastDistance;
-        }
+
         Vector3 origin = mainCamera.transform.position;
         Vector3 direction = mainCamera.transform.forward;
 
-        RaycastHit hit;
+        if (lineRenderer != null && GameManager.Instance != null)
+        {
+            Color pc = GameManager.Instance.playerColor;
+            lineRenderer.startColor = pc;
+            lineRenderer.endColor = pc;
+        }
 
         int layerMask = ~LayerMask.GetMask("Character");
-        Debug.Log("LayerMask value: " + layerMask);
+        RaycastHit hit;
+
         if (Physics.Raycast(origin, direction, out hit, maxDistance, layerMask))
         {
             lineRenderer.SetPosition(0, origin);
             lineRenderer.SetPosition(1, hit.point);
 
-            // Show hit dot
-            if (hitDot != null) hitDot.SetActive(true);
-            if (hitDot != null) hitDot.transform.position = hit.point;
-
-            //Debug.Log("Hit: " + hit.collider.gameObject.name);
-
-            // Outline highlight
-            OutlineHighlight newOutline = hit.collider.GetComponent<OutlineHighlight>();
-            if (currentOutline != newOutline)
+            if (hitDot != null)
             {
-                if (currentOutline != null) currentOutline.enabled = false;
-                if (newOutline != null) newOutline.enabled = true;
-                currentOutline = newOutline;
+                hitDot.SetActive(true);
+                hitDot.transform.position = hit.point;
+            }
+
+            // Debug
+            Debug.Log("[RayCast] Hitting: " + hit.collider.gameObject.name);
+
+            // Hover highlight
+            HoverHighlight newHighlight = hit.collider.GetComponentInParent<HoverHighlight>();
+            Debug.Log("[RayCast] HoverHighlight found: " + (newHighlight != null ? newHighlight.gameObject.name : "NULL"));
+
+            if (currentHighlight != newHighlight)
+            {
+                Debug.Log("[RayCast] Switching highlight");
+                if (currentHighlight != null) currentHighlight.OnHoverExit();
+                if (newHighlight != null) newHighlight.OnHoverEnter();
+                currentHighlight = newHighlight;
             }
 
             // Teleport
             Teleporting teleporting = hit.collider.GetComponent<Teleporting>();
             if (teleporting != null)
             {
-                // teleporting.TeleportTo(hit.point);
                 bool isInteractable = hit.collider.GetComponent<ObjectMenu>() != null;
                 teleporting.TeleportTo(hit.point, isInteractable);
+            }
+
+            // Button press
+            bool buttonPressed = Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.JoystickButton10);
+            Debug.Log("[RayCast] ButtonPressed: " + buttonPressed);
+
+            if (buttonPressed)
+            {
+                ColorSelector colorSelector = hit.collider.GetComponentInParent<ColorSelector>();
+                Debug.Log("[RayCast] ColorSelector found: " + (colorSelector != null ? colorSelector.gameObject.name : "NULL"));
+                if (colorSelector != null)
+                {
+                    colorSelector.OnSelect();
+                    return;
+                }
+
+                SelectableObject selectable = hit.collider.GetComponentInParent<SelectableObject>();
+                if (selectable != null)
+                {
+                    selectable.OnSelect();
+                    return;
+                }
+
+                ImageUpload upload = hit.collider.GetComponent<ImageUpload>();
+                if (upload != null)
+                {
+                    upload.OnSelect();
+                    return;
+                }
             }
         }
         else
@@ -157,21 +112,19 @@ public class RayCast : MonoBehaviour
             lineRenderer.SetPosition(0, origin);
             lineRenderer.SetPosition(1, origin + direction * maxDistance);
 
-            // Hide hit dot
             if (hitDot != null) hitDot.SetActive(false);
 
-            if (currentOutline != null)
+            if (currentHighlight != null)
             {
-                currentOutline.enabled = false;
-                currentOutline = null;
+                currentHighlight.OnHoverExit();
+                currentHighlight = null;
             }
         }
+
         for (int i = 0; i < 20; i++)
         {
             if (Input.GetKeyDown((KeyCode)(360 + i)))
-            {
                 Debug.Log("JoystickButton" + i + " pressed");
-            }
         }
     }
 }
