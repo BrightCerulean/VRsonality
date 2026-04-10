@@ -17,6 +17,12 @@ public class PortalTrigger : MonoBehaviour
             //Debug.Log("hasTeleported is now true");
             //Debug.Log("Player detected. Using: " + portal);
             portal.Activate(other.gameObject, this);
+            
+            if (portal is SceneTeleport)
+            {
+                hasTeleported = false;
+            }
+            
             //hasTeleported = false;
             //Debug.Log("hasTeleported is now false");
         }

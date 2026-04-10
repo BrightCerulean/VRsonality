@@ -1,4 +1,5 @@
 ﻿using System.Net.NetworkInformation;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     public void SetSpawnID(string id)
     {
         targetSpawnID = id;
+        Debug.Log("TARGET SPAWN ID SET TO: " + id);
     }
 
     public void Awake()
@@ -22,38 +24,58 @@ public class SpawnManager : MonoBehaviour
       else
         {
             Destroy(gameObject);
+            return;
         }
     }
 
-    //Finish doing the rest of this
+    
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("SCENE LOADING");
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        Debug.Log("SCENE UNLOADING");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        SpawnPoint[] spawnPoints = FindObjectsOfType<SpawnPoint>();
+        Debug.Log("FINDING SPAWN POINTS");
+        SpawnPoint[] spawnPoints = FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None);
         foreach (var point in spawnPoints)
         {
             if(point.spawnID == targetSpawnID)
             {
+                Debug.Log("TARGET SPAWN POINT LOCATED");
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 if (player != null)
                 {
-                    Rigidbody rb = player.GetComponent<Rigidbody>();
-                    rb.linearVelocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
+                    Debug.Log("TELEPORTING PLAYER");
+                    CharacterController cc = player.GetComponent<CharacterController>();
+                    if (cc != null)
+                    {
+                        cc.enabled = false;
+                    }
                     player.transform.position = point.transform.position;
                     player.transform.rotation = point.transform.rotation;
+                    if (cc != null)
+                    {
+                        cc.enabled = true;
+                    }
+                    targetSpawnID = null;
+                    Debug.Log("DONE");
                 }
                 break;
             }
         }
+        StartCoroutine(FadeInAfterLoad());
+    }
+    private IEnumerator FadeInAfterLoad()
+    {
+        yield return null; 
+        yield return ScreenFader.Instance.FadeFromBlack();
     }
 }
