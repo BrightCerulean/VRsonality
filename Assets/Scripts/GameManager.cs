@@ -125,4 +125,11 @@ public class GameManager : MonoBehaviour
         playerColorName = colorName;
         Debug.Log($"Player color set to: {colorName}");
     }
+    public string GetSelectionForScene(string sceneName)
+    {
+        if (selections.ContainsKey(sceneName))
+            return selections[sceneName];
+
+        return null;
+    }
 }

@@ -5,10 +5,29 @@ public class Interactable : MonoBehaviour
 {
     public Outline outline;
     public HoverText hoverText;
+    public string sceneName;
+    public string choiceLetter;
 
     private bool isHovered = false;
     private bool isSelected = false;
     private bool isLocked = false;
+
+    void Start()
+    {
+        if (GameManager.Instance == null) return;
+        string selected = GameManager.Instance.GetSelectionForScene(sceneName);
+        if (selected != null)
+        {
+            if (selected == choiceLetter)
+            {
+                Select(); 
+            }
+            else
+            {
+                Lock(); 
+            }
+        }
+    }
     void Awake()
     {
         SetHover(false);
@@ -16,29 +35,53 @@ public class Interactable : MonoBehaviour
 
     public void SetHover(bool state)
     {
+        if (GameManager.Instance != null && GameManager.Instance.IsSceneAnswered(sceneName))
+        {
+            return;
+        }
         if (isSelected || isLocked) return;
 
         isHovered = state;
 
         if (outline != null)
+        { 
+            ApplyPlayerColor();
             outline.enabled = state;
+        }
 
         if (hoverText != null)
+        {
             hoverText.SetVisible(state);
+            hoverText.SetOutline(false);
+        }
     }
 
     public void Select()
     {
         if (isLocked) return;
-
+        if (GameManager.Instance != null && GameManager.Instance.IsSceneAnswered(sceneName))
+        {
+            return;
+        }
         isSelected = true;
         isHovered = false;
 
         if (outline != null)
+        {
+            ApplyPlayerColor();
             outline.enabled = true;
+        }
 
         if (hoverText != null)
+        {
             hoverText.SetVisible(true);
+            hoverText.SetOutline(true);
+        }
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddSelection(sceneName, choiceLetter);
+        }
     }
     public void Lock()
     {
@@ -49,7 +92,10 @@ public class Interactable : MonoBehaviour
             outline.enabled = false;
 
         if (hoverText != null)
+        {
             hoverText.SetVisible(false);
+            hoverText.SetOutline(false);
+        }
     }
     public void ResetInteractable()
     {
@@ -62,5 +108,12 @@ public class Interactable : MonoBehaviour
 
         if (hoverText != null)
             hoverText.SetVisible(false);
+    }
+    void ApplyPlayerColor()
+    {
+        if (outline != null && GameManager.Instance != null)
+        {
+            outline.OutlineColor = GameManager.Instance.playerColor;
+        }
     }
 }

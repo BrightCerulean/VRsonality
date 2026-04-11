@@ -3,7 +3,7 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     public QuestionPanel questionPanel;
-    public string BButton;
+    public static string BButton;
 
     private void Awake()
     {
@@ -22,6 +22,12 @@ public class InputHandler : MonoBehaviour
         if (Input.GetButtonDown(BButton))
         {
             questionPanel.TogglePanel();
+        }
+
+        //Debug button
+        if (Input.GetButtonDown("js9"))
+        {
+            Debug.Log(GameManager.Instance.GetSelectionsString());
         }
     }
 }
