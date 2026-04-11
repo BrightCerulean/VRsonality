@@ -9,6 +9,7 @@ public class RayCast : MonoBehaviour
     public MenuController menuController;
     private Interactable currentHover;
     public static string AButton;
+    private HoverHighlight currentHighlight;
 
     //private OutlineHighlight currentOutline;
 
@@ -20,13 +21,6 @@ public class RayCast : MonoBehaviour
         if (lineRenderer != null)
         {
             lineRenderer.positionCount = 2;
-            if (GameManager.Instance != null)
-            {
-                Color c = GameManager.Instance.playerColor;
-                lineRenderer.startColor = c;
-                lineRenderer.endColor = c;
-                
-            }
         }
         else
         {
@@ -56,6 +50,13 @@ public class RayCast : MonoBehaviour
         Vector3 origin = mainCamera.transform.position;
         Vector3 direction = mainCamera.transform.forward;
 
+        if (lineRenderer != null && GameManager.Instance != null)
+        {
+            Color pc = GameManager.Instance.playerColor;
+            lineRenderer.startColor = pc;
+            lineRenderer.endColor = pc;
+        }
+
         RaycastHit hit;
 
         int layerMask = ~LayerMask.GetMask("Character");
@@ -71,6 +72,46 @@ public class RayCast : MonoBehaviour
             {
                 hitDot.SetActive(true);
                 hitDot.transform.position = hit.point;
+            }
+            // Hover highlight
+            HoverHighlight newHighlight = hit.collider.GetComponentInParent<HoverHighlight>();
+            Debug.Log("[RayCast] HoverHighlight found: " + (newHighlight != null ? newHighlight.gameObject.name : "NULL"));
+
+            if (currentHighlight != newHighlight)
+            {
+                Debug.Log("[RayCast] Switching highlight");
+                if (currentHighlight != null) currentHighlight.OnHoverExit();
+                if (newHighlight != null) newHighlight.OnHoverEnter();
+                currentHighlight = newHighlight;
+            }
+
+            // Button press
+            bool buttonPressed = Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.JoystickButton10) || Input.GetButtonDown(AButton);
+            Debug.Log("[RayCast] ButtonPressed: " + buttonPressed);
+
+            if (buttonPressed)
+            {
+                ColorSelector colorSelector = hit.collider.GetComponentInParent<ColorSelector>();
+                Debug.Log("[RayCast] ColorSelector found: " + (colorSelector != null ? colorSelector.gameObject.name : "NULL"));
+                if (colorSelector != null)
+                {
+                    colorSelector.OnSelect();
+                    return;
+                }
+
+                SelectableObject selectable = hit.collider.GetComponentInParent<SelectableObject>();
+                if (selectable != null)
+                {
+                    selectable.OnSelect();
+                    return;
+                }
+
+                ImageUpload upload = hit.collider.GetComponent<ImageUpload>();
+                if (upload != null)
+                {
+                    upload.OnSelect();
+                    return;
+                }
             }
         }
         else
@@ -109,6 +150,7 @@ public class RayCast : MonoBehaviour
                 }
             }
         }
+        /*
         //Teleport
         if (didHit)
         {
@@ -119,6 +161,7 @@ public class RayCast : MonoBehaviour
                 teleporting.TeleportTo(hit.point, isInteractable);
             }
         }
+        */
         for (int i = 0; i < 20; i++)
         {
             if (Input.GetKeyDown((KeyCode)(360 + i)))
@@ -126,5 +169,6 @@ public class RayCast : MonoBehaviour
                 Debug.Log("JoystickButton" + i + " pressed");
             }
         }
+        
     }
 }

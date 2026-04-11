@@ -2826,6 +2826,10 @@ PrefabInstance:
       propertyPath: settingsMenuCanvas
       value: 
       objectReference: {fileID: 1524754955}
+    - target: {fileID: 2248432440286687296, guid: bd40b1a2882af4154ace52d6bd0e72fd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cfd5a88d67fe26b469f25260a8e93216, type: 2}
     - target: {fileID: 4119802030252703776, guid: bd40b1a2882af4154ace52d6bd0e72fd, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3048872308
