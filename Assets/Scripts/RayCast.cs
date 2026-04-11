@@ -1,88 +1,3 @@
-/*
-using UnityEngine;
-
-public class RayCast : MonoBehaviour
-{
-    private LineRenderer lineRenderer;
-    private Camera mainCamera;
-    public float maxDistance = 50f;
-    public GameObject hitDot;
-
-    private OutlineHighlight currentOutline; // track current object
-
-    void Start()
-    {
-        lineRenderer = GetComponent<LineRenderer>();
-        mainCamera = Camera.main;
-
-        if (lineRenderer != null)
-        {
-            lineRenderer.positionCount = 2;
-        }
-        else
-        {
-            Debug.LogError("LineRenderer missing!");
-        }
-    }
-
-    void Update()
-    {
-        Vector3 origin = mainCamera.transform.position;
-        Vector3 direction = mainCamera.transform.forward;
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(origin, direction, out hit, maxDistance))
-        {
-            lineRenderer.SetPosition(0, origin);
-            lineRenderer.SetPosition(1, hit.point);
-
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
-
-            OutlineHighlight newOutline = hit.collider.GetComponent<OutlineHighlight>();
-
-            // check for object hit and enable outline
-            if (currentOutline != newOutline)
-            {
-                if (currentOutline != null)
-                {
-                    currentOutline.enabled = false;
-                }
-
-                if (newOutline != null)
-                {
-                    newOutline.enabled = true;
-                }
-
-                currentOutline = newOutline;
-            }
-            if (hitDot != null) hitDot.SetActive(true);
-            if (hitDot != null) hitDot.transform.position = hit.point;
-        }
-        else
-        {
-            lineRenderer.SetPosition(0, origin);
-            lineRenderer.SetPosition(1, origin + direction * maxDistance);
-
-           
-            if (currentOutline != null)
-            {
-                currentOutline.enabled = false;
-                currentOutline = null;
-            }
-            if (hitDot != null) hitDot.SetActive(false);
-        }
-        Teleporting teleporting = hit.collider.GetComponent<Teleporting>();
-        if (teleporting != null)
-            {
-                teleporting.TeleportTo(hit.point);
-            }
-    }
-        
-}
-
-*/
-
 using UnityEngine;
 
 public class RayCast : MonoBehaviour
@@ -93,7 +8,7 @@ public class RayCast : MonoBehaviour
     public GameObject hitDot;
     public MenuController menuController;
     private Interactable currentHover;
-    public string AButton;
+    public static string AButton;
 
     //private OutlineHighlight currentOutline;
 
@@ -105,11 +20,19 @@ public class RayCast : MonoBehaviour
         if (lineRenderer != null)
         {
             lineRenderer.positionCount = 2;
+            if (GameManager.Instance != null)
+            {
+                Color c = GameManager.Instance.playerColor;
+                lineRenderer.startColor = c;
+                lineRenderer.endColor = c;
+                
+            }
         }
         else
         {
             Debug.LogError("LineRenderer missing!");
         }
+
     }
 
     private void Awake()

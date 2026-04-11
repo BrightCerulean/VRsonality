@@ -1,26 +1,37 @@
 using UnityEngine;
+using TMPro;
 
 public class HoverText : MonoBehaviour
 {
     public GameObject textObject;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public TextMeshProUGUI textComponent;
 
+    void Start()
+    {
+        SetVisible(false);
+    }
     public void SetVisible(bool state)
     {
         if (textObject != null)
             textObject.SetActive(state);
+        if (state && textComponent != null)
+        {
+            textComponent.color = Color.black;
+        }
     }
 
-    /*
-    void Start()
+    public void SetOutline(bool enabled)
     {
-        if (textObject != null)
-            textObject.SetActive(false);
+        if (textComponent == null) return;
+        
+        if (enabled && GameManager.Instance != null)
+        {
+            textComponent.outlineWidth = 0.2f;
+            textComponent.outlineColor = GameManager.Instance.playerColor;
+        }
+        else
+        {
+            textComponent.outlineWidth = 0f;
+        }
     }
-    public void SetHover(bool state)
-    {
-        if (textObject != null)
-            textObject.SetActive(state);
-    }
-    */
 }

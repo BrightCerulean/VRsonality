@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoverText
   textObject: {fileID: 1937321311}
+  textComponent: {fileID: 1937321314}
 --- !u!114 &148447115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   outline: {fileID: 148447116}
   hoverText: {fileID: 148447114}
+  sceneName: toddlerbedroom
+  choiceLetter: H
 --- !u!65 &148447118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -407,6 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoverText
   textObject: {fileID: 734432762}
+  textComponent: {fileID: 734432765}
 --- !u!114 &360719589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,11 +455,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   outline: {fileID: 360719590}
   hoverText: {fileID: 360719588}
+  sceneName: toddlerbedroom
+  choiceLetter: C
 --- !u!20 &395137523 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 8297712433960337610, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
   m_PrefabInstance: {fileID: 2135032917}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &442025040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442025042}
+  - component: {fileID: 442025041}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &442025041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442025040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32989c65e13eb45a6b78f679b228318a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  playerColor: {r: 0.9924528, g: 0, b: 0, a: 1}
+  playerColorName: Red
+  currentQuestionSet: 1
+--- !u!4 &442025042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442025040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.66062, y: 0.7, z: 76.17973}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &501552103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7398294190479961541, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
@@ -599,6 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   textObject: {fileID: 1044680730}
+  textComponent: {fileID: 0}
 --- !u!65 &559543419
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -737,6 +791,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   outline: {fileID: 559543423}
   hoverText: {fileID: 559543418}
+  sceneName: 
+  choiceLetter: 
 --- !u!1 &734432762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,6 +1261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   textObject: {fileID: 994637141}
+  textComponent: {fileID: 0}
 --- !u!65 &812332243
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1313,6 +1370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   outline: {fileID: 812332241}
   hoverText: {fileID: 812332242}
+  sceneName: 
+  choiceLetter: 
 --- !u!1 &833269527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,6 +1534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoverText
   textObject: {fileID: 1642165798}
+  textComponent: {fileID: 1642165800}
 --- !u!114 &916376898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,6 +1579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   outline: {fileID: 916376899}
   hoverText: {fileID: 916376897}
+  sceneName: toddlerbedroom
+  choiceLetter: E
 --- !u!1 &994637141
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,6 +2193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   textObject: {fileID: 740153769}
+  textComponent: {fileID: 0}
 --- !u!65 &1169772705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2239,6 +2302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   outline: {fileID: 1169772703}
   hoverText: {fileID: 1169772704}
+  sceneName: 
+  choiceLetter: 
 --- !u!1001 &1175679400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3265,6 +3330,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 793351736903151082, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1802641449675232550, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
       propertyPath: quitItem
       value: 
@@ -3321,6 +3390,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2518362123977101003, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127688955935021000, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cfd5a88d67fe26b469f25260a8e93216, type: 2}
     - target: {fileID: 4810255626968018243, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
       propertyPath: m_Center.y
       value: 1
@@ -8781,6 +8858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoverText
   textObject: {fileID: 1356422367}
+  textComponent: {fileID: 1356422370}
 --- !u!114 &9120134472477812721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8825,6 +8903,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   outline: {fileID: 9120134472477812722}
   hoverText: {fileID: 9120134472477812720}
+  sceneName: toddlerbedroom
+  choiceLetter: S
 --- !u!65 &9120134472477812724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8898,3 +8978,4 @@ SceneRoots:
   - {fileID: 1169772708}
   - {fileID: 812332246}
   - {fileID: 1023621053}
+  - {fileID: 442025042}
