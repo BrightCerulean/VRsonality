@@ -1,0 +1,57 @@
+VRsonality — Full Todo List
+Gameroom (new)
+
+ Set up gameroom scene (GLB, standard setup)
+ Add "VRsonality" title text (TextMeshPro)
+ Create 4 lever GameObjects (Blue, Red, Green, Yellow)
+ Write ColorLever.cs — pull lever → sets player color in GameManager
+ Update GameManager.cs — add playerColor, playerColorName, SetPlayerColor()
+ Update RayCast.cs — LineRenderer color + outline color reflects chosen color
+ Add portal from gameroom → museum
+
+Museum Hub
+
+ Wire Past door portal → uploadroom
+ Wire Results/Future door portal → resultsroom
+ Add GameManager to museum scene
+ Test door unlock logic (MuseumManager + GetSelectionCount)
+
+Uploadroom
+
+ Replace button trigger with joystick/lever trigger for NativeGallery
+
+Toddlerbedroom + Playground
+
+ Add SelectableObject props to toddlerbedroom (Q1)
+ Add SelectableObject props to playground (Q2)
+ Add floating examination text to all selectable props
+
+Carroom (not built)
+
+ Set up scene (GLB TBD)
+ Add SelectableObject props (Q3)
+ Add portal to museum
+
+Officeroom (not built)
+
+ Set up scene (GLB TBD)
+ Add SelectableObject props (Q4)
+ Add portal to museum
+
+Resultsroom (not built)
+
+ Set up scene
+ Add lever trigger → pulls/displays final personality result
+ Wire ResultsDisplay.cs to TextMeshPro
+ Multiplayer: shared board showing all players' report cards (Landon)
+
+Polish
+
+ Audio cues on selections and portal transitions
+ Test full scene flow end to end
+ Build APK and test on Android
+
+Out of scope for now (future)
+
+ Photon PUN 2 multiplayer + voice chat (Landon)
+ Single player color-skip logic
