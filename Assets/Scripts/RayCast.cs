@@ -70,14 +70,6 @@ public class RayCast : MonoBehaviour
                 currentHighlight = newHighlight;
             }
 
-            // Teleport
-            Teleporting teleporting = hit.collider.GetComponent<Teleporting>();
-            if (teleporting != null)
-            {
-                bool isInteractable = hit.collider.GetComponent<ObjectMenu>() != null;
-                teleporting.TeleportTo(hit.point, isInteractable);
-            }
-
             // Button press
             bool buttonPressed = Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.JoystickButton10);
             Debug.Log("[RayCast] ButtonPressed: " + buttonPressed);
