@@ -8,7 +8,8 @@ public class Portal : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("PORTAL HIT BY: " + other.name);
-        if (other.CompareTag("Player"))
+        //if (other.CompareTag("Player"))
+        if (other.transform.root.CompareTag("Player"))
         {
             SceneManager.LoadScene(sceneToLoad);
         }

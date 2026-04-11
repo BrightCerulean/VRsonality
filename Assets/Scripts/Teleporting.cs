@@ -3,21 +3,24 @@ using UnityEngine;
 public class Teleporting : MonoBehaviour
 {
     public Transform playerTransform;
-    public float playerHeight = 1.8f;
-    private string aButton = "js5";
+    public float playerHeight = 3f;
 
-    //public void TeleportTo(Vector3 point)
-    public void TeleportTo(Vector3 point, bool isInteractable)
+    void Update()
     {
-        // To distinguish between floor and object and teleport only if it is floor
-        if (isInteractable) return;
-        if (!Input.GetButtonDown(aButton) && !Input.GetKeyDown(KeyCode.T)) 
+        if (Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.JoystickButton5))
         {
-            return;
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            RaycastHit[] hits = Physics.RaycastAll(ray, 50f);
+
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.collider.CompareTag("Floor"))
+                {
+                    playerTransform.position = hit.point + Vector3.up * playerHeight;
+                    Debug.Log("[Teleporting] Teleported to: " + hit.point);
+                    break;
+                }
+            }
         }
-        playerTransform.position = point + Vector3.up * playerHeight;
-        Debug.Log("Teleported to : " + point);
-
     }
-
 }
