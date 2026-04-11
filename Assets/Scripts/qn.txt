@@ -1,0 +1,88 @@
+VRSONALITY QUIZ — FINAL QUESTIONS & OBJECT MAP
+================================================
+
+Q1 — TODDLER BEDROOM (Age 2)
+Question: "You wake up in the middle of the night. What do you do?"
+
+A. Cry out loud until someone comes       | Hero (H)      | Object: Rattle
+B. Hug your teddy bear and try to sleep   | Caregiver (C) | Object: Teddy Bear
+C. Look around the room curiously         | Explorer (E)  | Object: Flashlight
+D. Lie still and listen to the sounds     | Sage (S)      | Object: Music Box
+
+---
+
+Q2 — PLAYGROUND (Age 5)
+Question: "Another child is crying alone near the sandbox. What do you do?"
+
+A. Go over and offer your toy             | Hero (H)      | Object: Toy Car
+B. Sit next to them quietly               | Caregiver (C) | Object: Blanket
+C. Watch from afar to understand why      | Sage (S)      | Object: Book
+D. Go back to the swings — they'll be fine| Explorer (E)  | Object: Ball
+
+Object placement:
+- Toy Car  → near sandbox
+- Blanket  → on bench
+- Book     → under tree
+- Ball     → near slide
+
+---
+
+Q3 — PARTY SCENE (Age 18)
+Question: "Everyone at the party is doing something you're not sure about. What do you do?"
+
+A. Jump in — lead the group               | Hero (H)      | Object: Microphone
+B. Check on the quieter people in the room| Caregiver (C) | Object: Cup/Drink Tray
+C. Observe before deciding anything       | Sage (S)      | Object: Notebook
+D. Slip out and explore the rest          | Explorer (E)  | Object: Map/Door
+
+---
+
+Q4 — ADULT BEDROOM (Age 35)
+Question: "You just got offered a major promotion — but it means relocating across the world. What do you do?"
+
+A. Accept immediately — you've worked too hard  | Hero (H)      | Object: Trophy
+B. Turn it down — your family needs you here    | Caregiver (C) | Object: Family Photo Frame
+C. Make a pros and cons list before deciding    | Sage (S)      | Object: Notebook/Planner
+D. Ask your boss for time to think it through   | Explorer (E)  | Object: Clock/Hourglass
+
+---
+
+ASSETS TO SOURCE
+================
+
+Object            | Scene           | Status         | Where to find
+------------------|-----------------|----------------|------------------------------------------
+Rattle            | Toddler Bedroom | Need to source | Asset Store: "baby rattle"
+Teddy Bear        | Toddler Bedroom | Need to source | 
+Flashlight        | Toddler Bedroom | Need to source | Asset Store: "flashlight low poly"
+Music Box         | Toddler Bedroom | Need to source | Asset Store: "music box"
+Toy Car           | Playground      | Need to source | Asset Store: "toy car low poly"
+Blanket           | Playground      | Need to source | Asset Store: "blanket low poly"
+Book              | Playground      | Need to source | Asset Store: "book low poly"
+Ball              | Playground      | Need to source | 
+Microphone        | Party Scene     | Need to source | Asset Store: "microphone low poly"
+Cup/Drink Tray    | Party Scene     | Need to source | Asset Store: "cup" or "drink tray"
+Notebook          | Party Scene     | Need to source | Asset Store: "notebook low poly"
+Map/Door          | Party Scene     | Need to source | 
+Trophy            | Adult Bedroom   | Need to source | Asset Store: "trophy low poly"
+Family Photo Frame| Adult Bedroom   | Need to source | Asset Store: "picture frame low poly"
+Notebook/Planner  | Adult Bedroom   | Need to source | Asset Store: "planner low poly"
+Clock/Hourglass   | Adult Bedroom   | Need to source | Asset Store: "hourglass low poly"
+
+---
+
+COMPONENT SETUP (apply to every selectable object)
+===================================================
+1. Box Collider (if not present)
+2. HoverHighlight.cs
+3. SelectableObject.cs
+   - selectionLetter: H / C / E / S
+   - objectDescription: answer text (see above)
+   - sceneName: scene name
+
+SCENE NAMES (must match exactly in SelectableObject.cs)
+=======================================================
+- toddlerbedroom
+- playground
+- partyroom
+- adultbedroom

@@ -112,9 +112,9 @@ public class SettingsMenuController : MonoBehaviour
         }*/
 
         HandleNavigation();
-        
-        if(Input.GetKeyDown(KeyCode.M))
-        //if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("js10"))
+
+        if (Input.GetKeyDown(KeyCode.M))
+            //if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("js10"))
             SelectCurrentItem();
     }
 
@@ -125,7 +125,7 @@ public class SettingsMenuController : MonoBehaviour
         if (joystickCooldown > 0f) return;
 
         // UpArrow or joystick up → move up
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         //if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("js0"))
         {
             currentIndex = (currentIndex - 1 + menuItems.Count) % menuItems.Count;
@@ -133,7 +133,7 @@ public class SettingsMenuController : MonoBehaviour
             joystickCooldown = JOYSTICK_DELAY;
         }
         // DownArrow or joystick down → move down
-        else if(Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         //else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("js3"))
         {
             currentIndex = (currentIndex + 1) % menuItems.Count;
@@ -223,9 +223,10 @@ public class SettingsMenuController : MonoBehaviour
     void ActionRestart()
     {
         Debug.Log("[Settings] Restart");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (GameManager.Instance != null)
+            GameManager.Instance.ResetSelections();
         CloseSettings();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("gamestart");
     }
 
     void ActionInventory()
@@ -305,7 +306,7 @@ public class SettingsMenuController : MonoBehaviour
         {
             GameObject panel = inventoryDisplayText.transform.parent.gameObject;
             //panel.SetActive(menuItems[currentIndex] == inventoryItem);
-       }
+        }
     }
 
     void UpdateLabels()
