@@ -93,6 +93,7 @@ public class RayCast : MonoBehaviour
     public GameObject hitDot;
     public MenuController menuController;
     private Interactable currentHover;
+    public string AButton;
 
     //private OutlineHighlight currentOutline;
 
@@ -108,6 +109,18 @@ public class RayCast : MonoBehaviour
         else
         {
             Debug.LogError("LineRenderer missing!");
+        }
+    }
+
+    private void Awake()
+    {
+        if (Application.isEditor)//PC
+        {
+            AButton = "js3";
+        }
+        else//Android
+        {
+            AButton = "js0";
         }
     }
 
@@ -158,7 +171,7 @@ public class RayCast : MonoBehaviour
                 currentHover.SetHover(true);
         }
         //Select
-        if (Input.GetButtonDown("js3"))
+        if (Input.GetButtonDown(AButton))
         {
             if (currentHover != null)
             {
