@@ -1185,8 +1185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb0a006e0f4a4a9cba6a527cd26effc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImageUpload
-  displaySurface: {fileID: 0}
-  portal: {fileID: 0}
+  displaySurface: {fileID: 2038129208}
+  portal: {fileID: 1218583727}
 --- !u!1 &996671253 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8771091787928289351, guid: 3a9d095532eb444858840499cdd2cbae, type: 3}

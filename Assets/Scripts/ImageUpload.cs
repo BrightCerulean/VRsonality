@@ -9,7 +9,7 @@ public class ImageUpload : MonoBehaviour
     public Renderer displaySurface; // drag Quad here in Inspector
 
     [Header("Portal")]
-    public GameObject portal; // drag Portal_To_Pastroom here
+    public GameObject portal;
 
     private bool imageUploaded = false;
     private string savedImagePath;
@@ -22,7 +22,7 @@ public class ImageUpload : MonoBehaviour
 
         // Load previously saved image if exists
         savedImagePath = Path.Combine(
-            Application.persistentDataPath, 
+            Application.persistentDataPath,
             "playerimage.jpg"
         );
 
@@ -79,13 +79,21 @@ public class ImageUpload : MonoBehaviour
         if (displaySurface != null)
             displaySurface.material.mainTexture = tex;
 
-        // Save image to persistentDataPath so other scenes can use it
-        byte[] bytes = tex.EncodeToJPG();
+        // Make texture readable before encoding
+        Texture2D readableTex = new Texture2D(tex.width, tex.height, tex.format, false);
+        Graphics.CopyTexture(tex, readableTex);
+        byte[] bytes = readableTex.EncodeToJPG();
         File.WriteAllBytes(savedImagePath, bytes);
         Debug.Log("[ImageUpload] Image saved to: " + savedImagePath);
 
         imageUploaded = true;
 
+        // Flip texture vertically
+        Color[] pixels = tex.GetPixels();
+        System.Array.Reverse(pixels);
+        tex.SetPixels(pixels);
+        tex.Apply();
+        
         // Activate portal to pastroom
         if (portal != null)
         {
@@ -100,13 +108,13 @@ public class ImageUpload : MonoBehaviour
     {
         string path = "file://" + savedImagePath;
 
-        UnityWebRequest request = 
+        UnityWebRequest request =
             UnityWebRequestTexture.GetTexture(path);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            Texture2D tex = 
+            Texture2D tex =
                 DownloadHandlerTexture.GetContent(request);
             if (displaySurface != null)
                 displaySurface.material.mainTexture = tex;
@@ -120,7 +128,7 @@ public class ImageUpload : MonoBehaviour
         }
         else
         {
-            Debug.LogError("[ImageUpload] Failed to load saved image: " 
+            Debug.LogError("[ImageUpload] Failed to load saved image: "
                 + request.error);
         }
     }
@@ -129,17 +137,17 @@ public class ImageUpload : MonoBehaviour
     public static IEnumerator DisplaySavedImage(Renderer target)
     {
         string path = "file://" + Path.Combine(
-            Application.persistentDataPath, 
+            Application.persistentDataPath,
             "playerimage.jpg"
         );
 
-        UnityWebRequest request = 
+        UnityWebRequest request =
             UnityWebRequestTexture.GetTexture(path);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            target.material.mainTexture = 
+            target.material.mainTexture =
                 DownloadHandlerTexture.GetContent(request);
             Debug.Log("[ImageUpload] Image displayed in scene");
         }
