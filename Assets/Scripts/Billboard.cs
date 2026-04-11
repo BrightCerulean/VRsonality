@@ -11,6 +11,7 @@ public class Billboard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Orients texts to always face the camera
         transform.forward = (transform.position - Camera.main.transform.position).normalized;
     }
 }

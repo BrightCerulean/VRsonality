@@ -145,7 +145,7 @@ public class RayCast : MonoBehaviour
             if (hitDot != null)
                 hitDot.SetActive(false);
         }
-        Interactable newHover = didHit ? hit.collider.GetComponent<Interactable>() : null;
+        Interactable newHover = didHit ? hit.collider.GetComponentInParent<Interactable>() : null;
         //Hover
         if (newHover != currentHover)
         {
@@ -163,7 +163,7 @@ public class RayCast : MonoBehaviour
             if (currentHover != null)
             {
                 currentHover.Select();
-
+                //Find all other interactable objects in the scene and lock them out
                 Interactable[] all = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
 
                 foreach (var obj in all)
