@@ -49,6 +49,8 @@ public class SettingsMenuController : MonoBehaviour
     private float joystickCooldown = 0f;
     private const float JOYSTICK_DELAY = 0.25f;
 
+    public static string XButton;
+
     void Start()
     {
         menuItems.Add(resumeItem);
@@ -62,6 +64,17 @@ public class SettingsMenuController : MonoBehaviour
             settingsMenuCanvas.SetActive(false);
 
         UpdateLabels();
+    }
+    private void Awake()
+    {
+        if (Application.isEditor)//PC
+        {
+            XButton = "js1";
+        }
+        else//Android
+        {
+            XButton = "js2";
+        }
     }
 
     /*void Update()
@@ -104,12 +117,12 @@ public class SettingsMenuController : MonoBehaviour
     void Update()
     {
         if (!isOpen) return;
-        /*if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("js7"))
+        if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("js7") || Input.GetButtonDown(XButton))
         {
             if (isOpen) CloseSettings();
             else OpenSettings();
             return;
-        }*/
+        }
 
         HandleNavigation();
 
