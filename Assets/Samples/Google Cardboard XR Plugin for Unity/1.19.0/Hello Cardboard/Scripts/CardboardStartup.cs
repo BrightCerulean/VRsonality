@@ -27,46 +27,24 @@ public class CardboardStartup : MonoBehaviour
     /// <summary>
     /// Start is called before the first frame update.
     /// </summary>
-    public void Start()
+    void Start()
     {
-        // Configures the app to not shut down the screen and sets the brightness to maximum.
-        // Brightness control is expected to work only in iOS, see:
-        // https://docs.unity3d.com/ScriptReference/Screen-brightness.html.
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Screen.brightness = 1.0f;
-
-        // Checks if the device parameters are stored and scans them if not.
-        if (!Api.HasDeviceParams())
-        {
-            Api.ScanDeviceParams();
-        }
+#if !UNITY_EDITOR
+    Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    Screen.brightness = 1.0f;
+    if (!Api.HasDeviceParams())
+        Api.ScanDeviceParams();
+#endif
     }
 
-    /// <summary>
-    /// Update is called once per frame.
-    /// </summary>
-    public void Update()
+    void Update()
     {
-        if (Api.IsGearButtonPressed)
-        {
-            Api.ScanDeviceParams();
-        }
-
-        if (Api.IsCloseButtonPressed)
-        {
-            Application.Quit();
-        }
-
-        if (Api.IsTriggerHeldPressed)
-        {
-            Api.Recenter();
-        }
-
-        if (Api.HasNewDeviceParams())
-        {
-            Api.ReloadDeviceParams();
-        }
-
-        Api.UpdateScreenParams();
+#if !UNITY_EDITOR
+    if (Api.IsGearButtonPressed) Api.ScanDeviceParams();
+    if (Api.IsCloseButtonPressed) Application.Quit();
+    if (Api.IsTriggerHeldPressed) Api.Recenter();
+    if (Api.HasNewDeviceParams()) Api.ReloadDeviceParams();
+    Api.UpdateScreenParams();
+#endif
     }
 }
