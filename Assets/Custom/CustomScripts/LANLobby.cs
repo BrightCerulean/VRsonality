@@ -10,8 +10,12 @@ public class LANLobby : MonoBehaviour
     public GameObject clientButton;
 
     [Header("Network")]
-    public string hostIP = "192.168.1.207";
+    public string hostIP = "127.0.0.1";
     public ushort port = 7777;
+
+    [Header("Lobby")]
+    public Canvas lobbyCanvas;
+    public Camera lobbyCamera;
 
     private int selectedIndex = 0;
     private GameObject[] buttons;
@@ -23,11 +27,18 @@ public class LANLobby : MonoBehaviour
     {
         if (NetworkManager.Singleton == null)
         {
-            Debug.LogError("NetworkManager not found");
+            Debug.LogError("NetworkManager not found in scene!");
             return;
         }
+
+        lobbyCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+        lobbyCanvas.worldCamera = lobbyCamera;
+        lobbyCanvas.planeDistance = 1f;
+
         buttons = new GameObject[] { hostButton, clientButton };
         HighlightButton(selectedIndex);
+
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
 
         NetworkManager.Singleton.OnClientDisconnectCallback += (clientId) =>
         {
@@ -40,21 +51,22 @@ public class LANLobby : MonoBehaviour
         };
     }
 
+    void OnClientConnected(ulong clientId)
+    {
+        if (clientId != NetworkManager.Singleton.LocalClientId) return;
+
+        lobbyCamera.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
+    void OnDestroy()
+    {
+        if (NetworkManager.Singleton != null)
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+    }
+
     void Update()
     {
-        Debug.Log("Update running, B: " + Input.GetKeyDown(KeyCode.B));
-        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsConnectedClient)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
-        if (NetworkManager.Singleton.IsConnectedClient)
-        {
-            Debug.Log("Connected as Client.");
-            gameObject.SetActive(false);
-            return;
-        }
-
         if (connectAttemptTime > 0 && Time.time - connectAttemptTime > 5f)
         {
             Debug.LogError($"5s timeout. IsClient:{NetworkManager.Singleton.IsClient} | IsListening:{NetworkManager.Singleton.IsListening} | IsConnected:{NetworkManager.Singleton.IsConnectedClient}");
@@ -107,19 +119,7 @@ public class LANLobby : MonoBehaviour
     void StartHost()
     {
         bool started = NetworkManager.Singleton.StartHost();
-        Debug.Log($"StartHost result: {started}");
-        Debug.Log($"IsHost: {NetworkManager.Singleton.IsHost} | IsServer: {NetworkManager.Singleton.IsServer} | IsListening: {NetworkManager.Singleton.IsListening}");
-
-        Application.logMessageReceived += (log, stack, type) =>
-        {
-            System.IO.File.AppendAllText(
-                Application.persistentDataPath + "/netlog.txt",
-                $"[{type}] {log}\n"
-            );
-        }; 
-        
-        gameObject.SetActive(false);
-
+        Debug.Log($"StartHost result: {started} | IsHost: {NetworkManager.Singleton.IsHost}");
     }
 
     void StartClient()
