@@ -16,6 +16,8 @@ public class RayCast : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.startWidth = 0.005f;
+        lineRenderer.endWidth = 0.005f;
         mainCamera = Camera.main;
 
         if (lineRenderer != null)
@@ -169,6 +171,6 @@ public class RayCast : MonoBehaviour
                 Debug.Log("JoystickButton" + i + " pressed");
             }
         }
-        
+
     }
 }
