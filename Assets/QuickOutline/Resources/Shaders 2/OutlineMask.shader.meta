@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7707e6657e67048779b12b31c66b9d5d
+timeCreated: 1520575773
+licenseType: Store
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 115488
+  packageName: Quick Outline
+  packageVersion: 1.1
+  assetPath: Assets/QuickOutline/Resources/Shaders/OutlineMask.shader
+  uploadId: 485303
