@@ -10,11 +10,7 @@ public class RayCast : MonoBehaviour
     private Interactable currentHover;
     public static string AButton;
     private HoverHighlight currentHighlight;
-    private StartButton currentHoveredButton;
     public bool raycastEnabled = true;
-    [Range(0.01f, 1f)] public float aimSmoothing = 0.15f;
-    private Vector3 smoothedDirection;
-    public LayerMask raycastMask = ~0;
     //private OutlineHighlight currentOutline;
 
     void Start()
@@ -25,20 +21,11 @@ public class RayCast : MonoBehaviour
         if (lineRenderer != null)
         {
             lineRenderer.positionCount = 2;
-            lineRenderer.startWidth = 0.05f;
-            lineRenderer.endWidth = 0.02f;
-            lineRenderer.numCapVertices = 8;
-            lineRenderer.numCornerVertices = 8;
-            lineRenderer.alignment = LineAlignment.TransformZ;
-            lineRenderer.useWorldSpace = true;
         }
         else
         {
             Debug.LogError("LineRenderer missing!");
         }
-
-        if (mainCamera != null)
-            smoothedDirection = mainCamera.transform.forward;
 
     }
 
@@ -74,22 +61,18 @@ public class RayCast : MonoBehaviour
             maxDistance = menuController.raycastDistance;
         }
         Vector3 origin = mainCamera.transform.position;
-        smoothedDirection = Vector3.Slerp(smoothedDirection, mainCamera.transform.forward, aimSmoothing);
-        Vector3 direction = smoothedDirection;
+        Vector3 direction = mainCamera.transform.forward;
 
         if (lineRenderer != null && GameManager.Instance != null)
         {
             Color pc = GameManager.Instance.playerColor;
-            pc.a = 1f;
             lineRenderer.startColor = pc;
-            Color fade = pc;
-            fade.a = 0.5f;
-            lineRenderer.endColor = fade;
+            lineRenderer.endColor = pc;
         }
 
         RaycastHit hit;
 
-        int layerMask = raycastMask & ~LayerMask.GetMask("Character", "Ignore Raycast");
+        int layerMask = ~LayerMask.GetMask("Character");
         bool didHit = Physics.Raycast(origin, direction, out hit, maxDistance, layerMask);
         //Debug.Log("LayerMask value: " + layerMask);
         if (didHit)
@@ -101,12 +84,11 @@ public class RayCast : MonoBehaviour
             if (hitDot != null)
             {
                 hitDot.SetActive(true);
-                hitDot.transform.position = hit.point + hit.normal * 0.02f;
-                hitDot.transform.rotation = Quaternion.LookRotation(-hit.normal);
+                hitDot.transform.position = hit.point;
             }
             // Hover highlight
             HoverHighlight newHighlight = hit.collider.GetComponentInParent<HoverHighlight>();
-            //Debug.Log("[RayCast] HoverHighlight found: " + (newHighlight != null ? newHighlight.gameObject.name : "NULL"));
+            Debug.Log("[RayCast] HoverHighlight found: " + (newHighlight != null ? newHighlight.gameObject.name : "NULL"));
 
             if (currentHighlight != newHighlight)
             {
@@ -116,18 +98,9 @@ public class RayCast : MonoBehaviour
                 currentHighlight = newHighlight;
             }
 
-            StartButton hoveredButton = hit.collider.GetComponentInParent<StartButton>();
-            Debug.Log("[RayCast] Hit: " + hit.collider.gameObject.name + " | StartButton: " + (hoveredButton != null ? hoveredButton.name : "NULL"));
-            if (hoveredButton != currentHoveredButton)
-            {
-                if (currentHoveredButton != null) currentHoveredButton.OnHoverExit();
-                if (hoveredButton != null) hoveredButton.OnHoverEnter();
-                currentHoveredButton = hoveredButton;
-            }
-
             // Button press
             bool buttonPressed = Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.JoystickButton10) || Input.GetButtonDown(AButton);
-            //Debug.Log("[RayCast] ButtonPressed: " + buttonPressed);
+            Debug.Log("[RayCast] ButtonPressed: " + buttonPressed);
 
             if (buttonPressed)
             {
@@ -150,13 +123,6 @@ public class RayCast : MonoBehaviour
                 if (upload != null)
                 {
                     upload.OnSelect();
-                    return;
-                }
-
-                StartButton startButton = hit.collider.GetComponentInParent<StartButton>();
-                if (startButton != null)
-                {
-                    startButton.OnSelect();
                     return;
                 }
             }
