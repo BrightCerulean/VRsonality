@@ -10,7 +10,7 @@ public class RayCast : MonoBehaviour
     private Interactable currentHover;
     public static string AButton;
     private HoverHighlight currentHighlight;
-
+    public bool raycastEnabled = true;
     //private OutlineHighlight currentOutline;
 
     void Start()
@@ -43,6 +43,19 @@ public class RayCast : MonoBehaviour
 
     void Update()
     {
+        if (!raycastEnabled)
+        {
+            if (lineRenderer != null)
+            {
+                lineRenderer.SetPosition(0, mainCamera.transform.position);
+                lineRenderer.SetPosition(1, mainCamera.transform.position);
+            }
+
+            if (hitDot != null)
+                hitDot.SetActive(false);
+
+            return;
+        }
         if (menuController != null)
         {
             maxDistance = menuController.raycastDistance;

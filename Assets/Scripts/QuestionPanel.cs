@@ -9,6 +9,7 @@ public class QuestionPanel : MonoBehaviour
     public float displayTime = 3f;
     private bool isVisible = false;
     private bool isToggledOpen = false;
+    public RayCast raycast;
     private Coroutine autoRoutine;
 
     void Start()
@@ -36,6 +37,7 @@ public class QuestionPanel : MonoBehaviour
         //Question appears on start then disappears after some time
         isVisible = true;
         gameObject.SetActive(true);
+        raycast.raycastEnabled = false;
 
         float timer = 0f;
         while (timer < displayTime)
@@ -72,6 +74,7 @@ public class QuestionPanel : MonoBehaviour
             StopCoroutine(autoRoutine);
 
         gameObject.SetActive(true);
+        raycast.raycastEnabled = false;
     }
 
     void HidePanel()
@@ -80,5 +83,6 @@ public class QuestionPanel : MonoBehaviour
         isVisible = false;
 
         gameObject.SetActive(false);
+        raycast.raycastEnabled = true;
     }
 }
