@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Interactable : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Interactable : MonoBehaviour
     private bool isHovered = false;
     private bool isSelected = false;
     private bool isLocked = false;
+    public GameObject portal;
 
     void Start()
     {
@@ -82,6 +84,8 @@ public class Interactable : MonoBehaviour
         {
             GameManager.Instance.AddSelection(sceneName, choiceLetter);
         }
+
+        portal.SetActive(true);
     }
     public void Lock()
     {

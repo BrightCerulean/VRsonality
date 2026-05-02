@@ -29,6 +29,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/playground.unity
     guid: d866529c731584b14b42789fafcba227
+  - enabled: 1
+    path: Assets/partyroom.unity
+    guid: f03ba2ffc704a54448d3ca13d5e52287
+  - enabled: 1
+    path: Assets/adultbedroom.unity
+    guid: bddecf598faaf954aa7f45032c4aac41
+  - enabled: 1
+    path: Assets/uploadroom2.unity
+    guid: d52647cc6480fc443b61b1ccb46e58ad
+  - enabled: 1
+    path: Assets/resultsroom.unity
+    guid: 98181fa986b2a4f1b9a83b0eb9dbd9a0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c24be599c7aa04e9ab530d3e03dbe388, type: 2}
