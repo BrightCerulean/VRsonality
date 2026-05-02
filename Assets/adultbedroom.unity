@@ -580,7 +580,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   playerColor: {r: 0.9924528, g: 0, b: 0, a: 1}
   playerColorName: Red
-  currentQuestionSet: 4
+  currentQuestionSet: 2
+  pastDone: 0
+  presentDone: 0
 --- !u!4 &442025042
 Transform:
   m_ObjectHideFlags: 0
@@ -1056,6 +1058,7 @@ MonoBehaviour:
   hoverText: {fileID: 559543418}
   sceneName: 
   choiceLetter: 
+  portal: {fileID: 0}
 --- !u!1001 &659161748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1485,6 +1488,7 @@ MonoBehaviour:
   hoverText: {fileID: 797470506}
   sceneName: adultbedroom
   choiceLetter: E
+  portal: {fileID: 1422440394}
 --- !u!65 &797470510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1683,6 +1687,7 @@ MonoBehaviour:
   hoverText: {fileID: 812332242}
   sceneName: 
   choiceLetter: 
+  portal: {fileID: 0}
 --- !u!1 &831806873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 117720, guid: 35e7ce7e1bb8eeb4f8e896fdfa8176db, type: 3}
@@ -1753,6 +1758,7 @@ MonoBehaviour:
   hoverText: {fileID: 831806877}
   sceneName: adultbedroom
   choiceLetter: H
+  portal: {fileID: 1422440394}
 --- !u!65 &831806883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2853,6 +2859,7 @@ MonoBehaviour:
   hoverText: {fileID: 1062593919}
   sceneName: adultbedroom
   choiceLetter: S
+  portal: {fileID: 1422440394}
 --- !u!65 &1062593923
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3352,6 +3359,7 @@ MonoBehaviour:
   hoverText: {fileID: 1169772704}
   sceneName: 
   choiceLetter: 
+  portal: {fileID: 0}
 --- !u!1001 &1175679400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3602,6 +3610,84 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4593085848619574, guid: 15797c01325b44348aca17fabfad1493, type: 3}
   m_PrefabInstance: {fileID: 1723560654}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1422440393
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2518674035178824049, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: questionSet
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849345029763397488, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 395137523}
+    - target: {fileID: 6907698477385997766, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_Name
+      value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907698477385997766, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.659512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 49.302372
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.90745515
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.4201491
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 49.688
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765135509295017542, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8159767336458143114, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+      propertyPath: sceneToLoad
+      value: museum
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+--- !u!1 &1422440394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6907698477385997766, guid: 55f539c3936c55f4b882619098d1f10c, type: 3}
+  m_PrefabInstance: {fileID: 1422440393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1518543881
 GameObject:
   m_ObjectHideFlags: 0
@@ -3774,6 +3860,7 @@ MonoBehaviour:
   hoverText: {fileID: 1661274626}
   sceneName: adultbedroom
   choiceLetter: C
+  portal: {fileID: 1422440394}
 --- !u!1001 &1705373001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5903,3 +5990,4 @@ SceneRoots:
   - {fileID: 812332246}
   - {fileID: 1023621053}
   - {fileID: 442025042}
+  - {fileID: 1422440393}
