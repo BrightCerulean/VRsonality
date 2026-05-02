@@ -88,7 +88,7 @@ public class RayCast : MonoBehaviour
             }
             // Hover highlight
             HoverHighlight newHighlight = hit.collider.GetComponentInParent<HoverHighlight>();
-            Debug.Log("[RayCast] HoverHighlight found: " + (newHighlight != null ? newHighlight.gameObject.name : "NULL"));
+            //Debug.Log("[RayCast] HoverHighlight found: " + (newHighlight != null ? newHighlight.gameObject.name : "NULL"));
 
             if (currentHighlight != newHighlight)
             {
@@ -100,7 +100,7 @@ public class RayCast : MonoBehaviour
 
             // Button press
             bool buttonPressed = Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.JoystickButton10) || Input.GetButtonDown(AButton);
-            Debug.Log("[RayCast] ButtonPressed: " + buttonPressed);
+            //Debug.Log("[RayCast] ButtonPressed: " + buttonPressed);
 
             if (buttonPressed)
             {
