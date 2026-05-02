@@ -1195,6 +1195,8 @@ MonoBehaviour:
   portalToUpload: {fileID: 746617875}
   portalToPresent: {fileID: 448453588}
   portalToResults: {fileID: 1469070742}
+  pastPortalTrigger: {fileID: 746617875}
+  presentPortalTrigger: {fileID: 448453588}
   pastDoorHighlight: {fileID: 357507593}
   presentDoorHighlight: {fileID: 1908962560}
   resultsDoorHighlight: {fileID: 1919133120}
@@ -1280,7 +1282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d137cb2569f594acd85ac2f1acc89409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Portal
-  sceneToLoad: uploadroom
+  sceneToLoad: uploadroom2
 --- !u!114 &448453592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2355,6 +2357,8 @@ MonoBehaviour:
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   playerColorName: None
   currentQuestionSet: 1
+  pastDone: 0
+  presentDone: 0
 --- !u!4 &1683899116
 Transform:
   m_ObjectHideFlags: 0
