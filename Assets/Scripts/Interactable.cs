@@ -93,6 +93,7 @@ public class Interactable : MonoBehaviour
         if (selectSound != null && audioSource != null)
             audioSource.PlayOneShot(selectSound);
 
+
         portal.SetActive(true);
     }
     public void Lock()
