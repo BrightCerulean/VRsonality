@@ -12,7 +12,7 @@ public class RayCast : MonoBehaviour
     private HoverHighlight currentHighlight;
     private StartButton currentHoveredButton;
     public bool raycastEnabled = true;
-    [Range(0.01f, 1f)] public float aimSmoothing = 0.15f;
+    [Range(0.01f, 1f)] public float aimSmoothing = 0.9f;
     private Vector3 smoothedDirection;
     public LayerMask raycastMask = ~0;
     //private OutlineHighlight currentOutline;
@@ -29,7 +29,7 @@ public class RayCast : MonoBehaviour
             lineRenderer.endWidth = 0.02f;
             lineRenderer.numCapVertices = 8;
             lineRenderer.numCornerVertices = 8;
-            lineRenderer.alignment = LineAlignment.TransformZ;
+            lineRenderer.alignment = LineAlignment.View;
             lineRenderer.useWorldSpace = true;
         }
         else
