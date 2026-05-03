@@ -4,14 +4,23 @@ public class ColorSelector : MonoBehaviour
 {
     public Color color;
     public string colorName;
-    public GameObject startButton;
+    public GameObject startCanvas;
+    public GameObject pickCanvas;
 
     private Vector3 originalPosition;
-    private bool isSelected = false;
 
     void Start()
     {
         originalPosition = transform.position;
+
+        if (startCanvas == null)
+            startCanvas = GameObject.Find("CanvasStart");
+
+        if (pickCanvas == null)
+            pickCanvas = GameObject.Find("CanvasPick");
+
+        if (startCanvas != null)
+            startCanvas.SetActive(false);
     }
 
     public void OnSelect()
@@ -19,7 +28,6 @@ public class ColorSelector : MonoBehaviour
         // Deselect all others
         foreach (var selector in FindObjectsByType<ColorSelector>(FindObjectsSortMode.None))
         {
-            selector.isSelected = false;
             selector.transform.position = selector.originalPosition;
         }
 
@@ -31,13 +39,16 @@ public class ColorSelector : MonoBehaviour
         }
 
         // Select this one
-        isSelected = true;
         transform.position = originalPosition + Vector3.up * 0.3f;
         GameManager.Instance.SetPlayerColor(color, colorName);
         Debug.Log($"Color selected: {colorName}");
 
-        // Activate start button
-        if (startButton != null)
-            startButton.SetActive(true);
+        // Hide pick canvas, show start canvas
+        Debug.Log($"[ColorSelector] pickCanvas={(pickCanvas != null ? pickCanvas.name : "NULL")} startCanvas={(startCanvas != null ? startCanvas.name : "NULL")}");
+        if (pickCanvas != null)
+            pickCanvas.SetActive(false);
+
+        if (startCanvas != null)
+            startCanvas.SetActive(true);
     }
 }
