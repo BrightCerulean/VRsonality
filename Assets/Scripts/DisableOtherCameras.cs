@@ -7,7 +7,10 @@ public class DisableOtherCameras : NetworkBehaviour
 
     void Start()
     {
-        if (!IsOwner)
+        if (playerCamera == null)
+            playerCamera = GetComponentInChildren<Camera>();
+
+        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsConnectedClient && !IsOwner && playerCamera != null)
         {
             playerCamera.enabled = false;
         }
