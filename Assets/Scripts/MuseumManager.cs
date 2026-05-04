@@ -5,10 +5,7 @@ public class MuseumManager : MonoBehaviour
     [Header("Portals")]
     public GameObject portalToUpload;
     public GameObject portalToPresent;
-    public GameObject portalToResults;git stash show stash@{0} --stat
-
-    public GameObject pastPortalTrigger;
-    public GameObject presentPortalTrigger;
+    public GameObject portalToResults;
 
     public GameObject pastPortalTrigger;
     public GameObject presentPortalTrigger;
