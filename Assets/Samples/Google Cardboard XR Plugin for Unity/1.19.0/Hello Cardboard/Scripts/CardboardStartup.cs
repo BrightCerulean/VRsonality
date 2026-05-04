@@ -29,6 +29,7 @@ public class CardboardStartup : MonoBehaviour
     /// </summary>
     public void Start()
     {
+#if !UNITY_EDITOR
         // Configures the app to not shut down the screen and sets the brightness to maximum.
         // Brightness control is expected to work only in iOS, see:
         // https://docs.unity3d.com/ScriptReference/Screen-brightness.html.
@@ -40,6 +41,7 @@ public class CardboardStartup : MonoBehaviour
         {
             Api.ScanDeviceParams();
         }
+#endif
     }
 
     /// <summary>
@@ -47,6 +49,7 @@ public class CardboardStartup : MonoBehaviour
     /// </summary>
     public void Update()
     {
+#if !UNITY_EDITOR
         if (Api.IsGearButtonPressed)
         {
             Api.ScanDeviceParams();
@@ -68,5 +71,6 @@ public class CardboardStartup : MonoBehaviour
         }
 
         Api.UpdateScreenParams();
+#endif
     }
 }
