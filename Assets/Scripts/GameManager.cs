@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
         return selections.ContainsKey(sceneName);
     }
 
+
     public void ResetSelections()
     {
         selections.Clear();
