@@ -581,6 +581,8 @@ MonoBehaviour:
   playerColor: {r: 0.9924528, g: 0, b: 0, a: 1}
   playerColorName: Red
   currentQuestionSet: 2
+  fadeCanvasGroup: {fileID: 0}
+  fadeDuration: 0.5
 --- !u!4 &442025042
 Transform:
   m_ObjectHideFlags: 0
@@ -1788,8 +1790,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5125446, y: 0.57211125, z: 0.85621274}
-  m_Center: {x: 0.118880466, y: 0.17457952, z: -0.03729363}
+  m_Size: {x: 0.74402356, y: 1.1667258, z: 1.2214317}
+  m_Center: {x: 0.0031411399, y: -0.12272805, z: -0.09960552}
 --- !u!1 &833269527
 GameObject:
   m_ObjectHideFlags: 0

@@ -892,6 +892,8 @@ MonoBehaviour:
   playerColor: {r: 0.9924528, g: 0, b: 0, a: 1}
   playerColorName: Red
   currentQuestionSet: 2
+  fadeCanvasGroup: {fileID: 0}
+  fadeDuration: 0.5
 --- !u!4 &442025042
 Transform:
   m_ObjectHideFlags: 0
@@ -1449,9 +1451,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683990566}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.02, y: 0.10000015, z: -2.69}
-  m_LocalScale: {x: 0.14285713, y: 0.14285713, z: 0.14285713}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 9.0599985, y: 0.3800009, z: 1.1400028}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 156448605}
@@ -1459,7 +1461,7 @@ Transform:
   - {fileID: 1197153594}
   - {fileID: 876785295}
   - {fileID: 1012809047}
-  m_Father: {fileID: 46396667338597890}
+  m_Father: {fileID: 1356660040}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &755064278
 GameObject:
@@ -3358,7 +3360,7 @@ GameObject:
   - component: {fileID: 1356660042}
   - component: {fileID: 1356660041}
   m_Layer: 0
-  m_Name: Quiet Person
+  m_Name: Quiet People
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3379,6 +3381,7 @@ Transform:
   m_Children:
   - {fileID: 1447876305}
   - {fileID: 1215593551}
+  - {fileID: 683990567}
   m_Father: {fileID: 46396667338597890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1356660041
@@ -3400,8 +3403,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.9445105, y: 14.181141, z: 7.3829947}
-  m_Center: {x: 7.0672035, y: 5.4327216, z: 0.1041608}
+  m_Size: {x: 24.734102, y: 14.181141, z: 12.621545}
+  m_Center: {x: -7.2228794, y: 5.4327216, z: -2.5150745}
 --- !u!114 &1356660042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4011,7 +4014,6 @@ Transform:
   - {fileID: 916376896}
   - {fileID: 581895268}
   - {fileID: 1356660040}
-  - {fileID: 683990567}
   - {fileID: 937085119}
   - {fileID: 150885729}
   m_Father: {fileID: 0}
