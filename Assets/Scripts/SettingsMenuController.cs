@@ -116,18 +116,18 @@ public class SettingsMenuController : MonoBehaviour
     }*/
     void Update()
     {
-        if (!isOpen) return;
-        if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("js7") || Input.GetButtonDown(XButton))
+        if (Input.GetKeyDown(KeyCode.Y) || Input.GetButtonDown("js5"))
         {
             if (isOpen) CloseSettings();
             else OpenSettings();
             return;
         }
 
+        if (!isOpen) return;
+
         HandleNavigation();
 
         if (Input.GetKeyDown(KeyCode.M))
-            //if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("js10"))
             SelectCurrentItem();
     }
 

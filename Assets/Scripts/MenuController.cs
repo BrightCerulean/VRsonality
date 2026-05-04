@@ -494,8 +494,7 @@ public class MenuController : MonoBehaviour
                  }
              }
          }
-        if (Input.GetKeyDown(KeyCode.Return))
-        //if (Input.GetButtonDown("js7") || Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("js7"))
         {
             if (settingsMenuController != null)
             {

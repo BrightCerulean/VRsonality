@@ -19,7 +19,7 @@ public class InputHandler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown(BButton))
+        if (Input.GetButtonDown(BButton) || Input.GetKeyDown(KeyCode.B))
         {
             questionPanel.TogglePanel();
         }
