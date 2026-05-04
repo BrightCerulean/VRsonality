@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Interactable : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class Interactable : MonoBehaviour
     private bool isHovered = false;
     private bool isSelected = false;
     private bool isLocked = false;
+    public GameObject portal;
+    public AudioClip selectSound;
+    private AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
         if (GameManager.Instance == null) return;
         string selected = GameManager.Instance.GetSelectionForScene(sceneName);
         if (selected != null)
@@ -82,6 +89,11 @@ public class Interactable : MonoBehaviour
         {
             GameManager.Instance.AddSelection(sceneName, choiceLetter);
         }
+
+        if (selectSound != null && audioSource != null)
+            audioSource.PlayOneShot(selectSound);
+
+        portal.SetActive(true);
     }
     public void Lock()
     {

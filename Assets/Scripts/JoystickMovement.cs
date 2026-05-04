@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class JoystickMovement : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 20f;
     public Transform cameraTransform;
+    public bool invertHorizontal = false;
+    public bool invertVertical = false;
 
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis("Horizontal") * (invertHorizontal ? -1f : 1f);
+        float v = Input.GetAxis("Vertical")   * (invertVertical   ? -1f : 1f);
 
         if (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f)
         {
