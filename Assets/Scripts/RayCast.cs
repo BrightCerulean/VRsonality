@@ -117,7 +117,7 @@ public class RayCast : MonoBehaviour
             }
 
             StartButton hoveredButton = hit.collider.GetComponentInParent<StartButton>();
-            Debug.Log("[RayCast] Hit: " + hit.collider.gameObject.name + " | StartButton: " + (hoveredButton != null ? hoveredButton.name : "NULL"));
+            //Debug.Log("[RayCast] Hit: " + hit.collider.gameObject.name + " | StartButton: " + (hoveredButton != null ? hoveredButton.name : "NULL"));
             if (hoveredButton != currentHoveredButton)
             {
                 if (currentHoveredButton != null) currentHoveredButton.OnHoverExit();

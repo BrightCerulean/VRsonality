@@ -1,5 +1,7 @@
-using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<string, string> selections =
         new Dictionary<string, string>();
+
+    public CanvasGroup fadeCanvasGroup;
+    public float fadeDuration = 0.5f;
 
     void Awake()
     {
@@ -132,4 +137,47 @@ public class GameManager : MonoBehaviour
 
         return null;
     }
+
+    public void TransitionToScene(string sceneName)
+    {
+        StartCoroutine(FadeAndLoad(sceneName));
+    }
+
+    private IEnumerator FadeAndLoad(string sceneName)
+    {
+        Debug.Log("FADE OUT START");
+
+        fadeCanvasGroup.gameObject.SetActive(true);
+
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            fadeCanvasGroup.alpha = Mathf.Lerp(0, 1, t / fadeDuration);
+            yield return null;
+        }
+
+        fadeCanvasGroup.alpha = 1f;
+
+        Debug.Log("LOADING SCENE: " + sceneName);
+
+        SceneManager.LoadScene(sceneName);
+
+        yield return null;
+
+        Debug.Log("FADE IN START");
+
+        t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            fadeCanvasGroup.alpha = Mathf.Lerp(1, 0, t / fadeDuration);
+            yield return null;
+        }
+
+        fadeCanvasGroup.alpha = 0f;
+
+        Debug.Log("FADE COMPLETE");
+    }
+
 }
