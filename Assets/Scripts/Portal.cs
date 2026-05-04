@@ -28,6 +28,6 @@ public class Portal : MonoBehaviour
             audio.PlayOneShot(transitionSound);
             yield return new WaitForSeconds(transitionSound.length);
         }
-        SceneManager.LoadScene(sceneToLoad);
+        GameManager.Instance.TransitionToScene(sceneToLoad);
     }
 }
