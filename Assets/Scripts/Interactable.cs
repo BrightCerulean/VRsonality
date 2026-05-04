@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Interactable : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class Interactable : MonoBehaviour
     public GameObject portal;
     public AudioClip selectSound;
     private AudioSource audioSource;
+    public bool autoTransition = false;
+    public string nextScene;
+    private bool transitioning = false;
 
     void Start()
     {
@@ -93,7 +97,25 @@ public class Interactable : MonoBehaviour
         if (selectSound != null && audioSource != null)
             audioSource.PlayOneShot(selectSound);
 
-        portal.SetActive(true);
+        if (autoTransition)
+        {
+            if (string.IsNullOrEmpty(nextScene))
+            {
+                Debug.LogWarning("[Interactable] nextScene is empty! Set it in the Inspector.");
+                return;
+            }
+            transitioning = true;
+            StartCoroutine(LoadNextScene());
+        }
+        else
+            portal.SetActive(true);
+    }
+
+    private IEnumerator LoadNextScene()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("[Interactable] Loading scene: " + nextScene);
+        SceneManager.LoadScene(nextScene);
     }
     public void Lock()
     {
