@@ -2,23 +2,30 @@ using UnityEngine;
 
 public class HoverHighlight : MonoBehaviour
 {
-    private Vector3 originalScale;
+    public Color outlineColor = new Color(1f, 0.85f, 0.2f, 1f);
+    public float outlineWidth = 5f;
+    private Outline outline;
 
     void Start()
     {
-        originalScale = transform.localScale;
-        Debug.Log("[HoverHighlight] Initialized on: " + gameObject.name);
+        outline = GetComponent<Outline>();
+        if (outline == null)
+            outline = gameObject.AddComponent<Outline>();
+
+        outline.OutlineColor = outlineColor;
+        outline.OutlineWidth = outlineWidth;
+        outline.enabled = false;
     }
 
     public void OnHoverEnter()
     {
-        Debug.Log("[HoverHighlight] OnHoverEnter: " + gameObject.name);
-        transform.localScale = originalScale * 1.5f;
+        if (outline != null)
+            outline.enabled = true;
     }
 
     public void OnHoverExit()
     {
-        Debug.Log("[HoverHighlight] OnHoverExit: " + gameObject.name);
-        transform.localScale = originalScale;
+        if (outline != null)
+            outline.enabled = false;
     }
 }

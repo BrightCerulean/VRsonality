@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using System.IO;
+using TMPro;
 
 public class ImageUpload : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class ImageUpload : MonoBehaviour
 
     [Header("Portal")]
     public GameObject portal;
+
+    [Header("Status")]
+    public TextMeshProUGUI statusText;
+    public float messageDuration = 3f;
 
     private int currentImageIndex = 0;
     private string[] savedImagePaths = new string[4];
@@ -49,19 +54,38 @@ public class ImageUpload : MonoBehaviour
         if (!hasPermission)
         {
             Debug.LogWarning("[ImageUpload] Gallery permission denied");
+            StartCoroutine(ShowMessage("Gallery access denied. Please allow photo access in settings."));
             return;
         }
 
-        NativeGallery.GetImageFromGallery((path) =>
+        try
         {
-            if (path == null)
+            NativeGallery.GetImageFromGallery((path) =>
             {
-                Debug.Log("[ImageUpload] No image selected");
-                return;
-            }
-            Debug.Log("[ImageUpload] Image selected: " + path);
-            StartCoroutine(LoadAndDisplayImage(path, currentImageIndex));
-        }, "Select your photo", "image/*");
+                if (path == null)
+                {
+                    Debug.Log("[ImageUpload] No image selected");
+                    StartCoroutine(ShowMessage("No image selected. Tap again to try."));
+                    return;
+                }
+                Debug.Log("[ImageUpload] Image selected: " + path);
+                StartCoroutine(LoadAndDisplayImage(path, currentImageIndex));
+            }, "Select your photo", "image/*");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("[ImageUpload] Gallery failed to open: " + e.Message);
+            StartCoroutine(ShowMessage("Could not open gallery. Please try again."));
+        }
+    }
+
+    IEnumerator ShowMessage(string msg)
+    {
+        if (statusText == null) yield break;
+        statusText.text = msg;
+        statusText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(messageDuration);
+        statusText.gameObject.SetActive(false);
     }
 
     IEnumerator LoadAndDisplayImage(string path, int index)
@@ -71,6 +95,7 @@ public class ImageUpload : MonoBehaviour
         if (tex == null)
         {
             Debug.LogError("[ImageUpload] Failed to load image");
+            StartCoroutine(ShowMessage("Failed to load image. Please try a different photo."));
             yield break;
         }
 
