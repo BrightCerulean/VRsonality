@@ -182,7 +182,7 @@ public class RayCast : MonoBehaviour
                 currentHover.SetHover(true);
         }
         //Select
-        if (Input.GetButtonDown(AButton))
+        if (Input.GetButtonDown(AButton) || Input.GetKeyDown(KeyCode.A))
         {
             if (currentHover != null)
             {
