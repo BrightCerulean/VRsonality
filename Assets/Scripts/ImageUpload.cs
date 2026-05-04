@@ -41,6 +41,17 @@ public class ImageUpload : MonoBehaviour
 
     void OpenGallery()
     {
+        bool hasPermission = NativeGallery.CheckPermission(
+            NativeGallery.PermissionType.Read,
+            NativeGallery.MediaType.Image
+        );
+
+        if (!hasPermission)
+        {
+            Debug.LogWarning("[ImageUpload] Gallery permission denied");
+            return;
+        }
+
         NativeGallery.GetImageFromGallery((path) =>
         {
             if (path == null)

@@ -2,17 +2,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class Portal : MonoBehaviour
+public class SceneTrigger : MonoBehaviour
 {
-    public string sceneToLoad = "pastroom";
+    public string sceneToLoad;
     public AudioClip transitionSound;
+
     private bool transitioning = false;
 
-    void OnTriggerEnter(Collider other)
+    void Update()
     {
-        Debug.Log("PORTAL HIT BY: " + other.name);
         if (transitioning) return;
-        if (other.transform.root.CompareTag("Player"))
+
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             transitioning = true;
             StartCoroutine(LoadWithSound());

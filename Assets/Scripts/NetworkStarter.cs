@@ -5,6 +5,7 @@ public class NetworkStarter : MonoBehaviour
 {
     void OnEnable()
     {
+        if (NetworkManager.Singleton == null) return;
         NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
         {
             Debug.Log("Client connected: " + id);
