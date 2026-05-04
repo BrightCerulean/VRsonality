@@ -2357,7 +2357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32989c65e13eb45a6b78f679b228318a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  playerColor: {r: 1, g: 1, b: 1, a: 1}
+  playerColor: {r: 1, g: 0, b: 0, a: 1}
   playerColorName: None
   currentQuestionSet: 1
 --- !u!4 &1683899116
