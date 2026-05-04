@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -486.29, y: -242.02}
+  m_AnchoredPosition: {x: -486.29, y: -246.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &105654380
@@ -191,8 +191,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Save it - Security is everything
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -341,8 +341,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Launch the business idea you''ve had for years '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -366,8 +366,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23
-  m_fontSizeBase: 23
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -581,8 +581,6 @@ MonoBehaviour:
   playerColor: {r: 0.9924528, g: 0, b: 0, a: 1}
   playerColorName: Red
   currentQuestionSet: 2
-  pastDone: 0
-  presentDone: 0
 --- !u!4 &442025042
 Transform:
   m_ObjectHideFlags: 0
@@ -1059,6 +1057,9 @@ MonoBehaviour:
   sceneName: 
   choiceLetter: 
   portal: {fileID: 0}
+  selectSound: {fileID: 0}
+  autoTransition: 0
+  nextScene: 
 --- !u!1001 &659161748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1489,6 +1490,9 @@ MonoBehaviour:
   sceneName: adultbedroom
   choiceLetter: E
   portal: {fileID: 1422440394}
+  selectSound: {fileID: 0}
+  autoTransition: 1
+  nextScene: museum
 --- !u!65 &797470510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1688,6 +1692,9 @@ MonoBehaviour:
   sceneName: 
   choiceLetter: 
   portal: {fileID: 0}
+  selectSound: {fileID: 0}
+  autoTransition: 0
+  nextScene: 
 --- !u!1 &831806873 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 117720, guid: 35e7ce7e1bb8eeb4f8e896fdfa8176db, type: 3}
@@ -1759,6 +1766,9 @@ MonoBehaviour:
   sceneName: adultbedroom
   choiceLetter: H
   portal: {fileID: 1422440394}
+  selectSound: {fileID: 0}
+  autoTransition: 1
+  nextScene: museum
 --- !u!65 &831806883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1839,8 +1849,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "You've saved up a significant amount of money. \nWhat do you do with it?"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2031,7 +2041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -501.26, y: -245.62}
+  m_AnchoredPosition: {x: -504.2, y: -249.89}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &934714030
@@ -2068,8 +2078,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Travel and experience the world before settling down '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2093,8 +2103,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2860,6 +2870,9 @@ MonoBehaviour:
   sceneName: adultbedroom
   choiceLetter: S
   portal: {fileID: 1422440394}
+  selectSound: {fileID: 0}
+  autoTransition: 1
+  nextScene: museum
 --- !u!65 &1062593923
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3360,6 +3373,9 @@ MonoBehaviour:
   sceneName: 
   choiceLetter: 
   portal: {fileID: 0}
+  selectSound: {fileID: 0}
+  autoTransition: 0
+  nextScene: 
 --- !u!1001 &1175679400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3861,6 +3877,9 @@ MonoBehaviour:
   sceneName: adultbedroom
   choiceLetter: C
   portal: {fileID: 1422440394}
+  selectSound: {fileID: 0}
+  autoTransition: 1
+  nextScene: museum
 --- !u!1001 &1705373001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5021,7 +5040,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -91.36, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -510.1, y: -236.9}
+  m_AnchoredPosition: {x: -510.1, y: -239.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1982209167
@@ -5058,8 +5077,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Use it to help a family member who needs it '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5083,8 +5102,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

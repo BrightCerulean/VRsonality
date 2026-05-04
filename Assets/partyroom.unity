@@ -191,8 +191,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Jump into the group of people having a conversation
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -462,6 +462,9 @@ MonoBehaviour:
   sceneName: partyroom
   choiceLetter: S
   portal: {fileID: 841574168}
+  selectSound: {fileID: 0}
+  autoTransition: 1
+  nextScene: adultbedroom
 --- !u!1001 &156448604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -608,8 +611,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Slip out and explore the rest of the house
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -889,8 +892,6 @@ MonoBehaviour:
   playerColor: {r: 0.9924528, g: 0, b: 0, a: 1}
   playerColorName: Red
   currentQuestionSet: 2
-  pastDone: 0
-  presentDone: 0
 --- !u!4 &442025042
 Transform:
   m_ObjectHideFlags: 0
@@ -1191,6 +1192,9 @@ MonoBehaviour:
   sceneName: 
   choiceLetter: 
   portal: {fileID: 0}
+  selectSound: {fileID: 0}
+  autoTransition: 0
+  nextScene: 
 --- !u!1 &581895267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1225,7 @@ Transform:
   m_GameObject: {fileID: 581895267}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -1.3457597, y: 0.18142855, z: 1.5008016}
+  m_LocalPosition: {x: 0.6, y: 0.18142855, z: 1.5008016}
   m_LocalScale: {x: 0.14285713, y: 0.14285713, z: 0.14285713}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1295,6 +1299,9 @@ MonoBehaviour:
   sceneName: partyroom
   choiceLetter: H
   portal: {fileID: 841574168}
+  selectSound: {fileID: 0}
+  autoTransition: 1
+  nextScene: adultbedroom
 --- !u!65 &581895273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1442,8 +1449,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683990566}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 6.4009595, y: 0.10000015, z: 6.1039906}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -4.02, y: 0.10000015, z: -2.69}
   m_LocalScale: {x: 0.14285713, y: 0.14285713, z: 0.14285713}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1453,7 +1460,7 @@ Transform:
   - {fileID: 876785295}
   - {fileID: 1012809047}
   m_Father: {fileID: 46396667338597890}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &755064278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,8 +1627,8 @@ MonoBehaviour:
 
     What do you do?'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2006,7 +2013,7 @@ Transform:
   m_GameObject: {fileID: 937085118}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2205,8 +2212,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchoredPosition: {x: 0.3059, y: 1.5845}
+  m_SizeDelta: {x: 120.3913, y: 55.031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1044680730
 GameObject:
@@ -2625,6 +2632,9 @@ MonoBehaviour:
   sceneName: partyroom
   choiceLetter: E
   portal: {fileID: 841574168}
+  selectSound: {fileID: 0}
+  autoTransition: 1
+  nextScene: adultbedroom
 --- !u!1 &1131266645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,8 +2707,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue people watching before doing anything
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3181,8 +3191,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Check on the quieter people in the room
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3453,6 +3463,9 @@ MonoBehaviour:
   sceneName: partyroom
   choiceLetter: C
   portal: {fileID: 841574168}
+  selectSound: {fileID: 0}
+  autoTransition: 1
+  nextScene: adultbedroom
 --- !u!1001 &1447876304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3475,19 +3488,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.8
+      value: -0.79999995
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.33
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.9
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.4711271
+      value: 0.91335684
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3495,7 +3508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.8820654
+      value: -0.40716013
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3507,7 +3520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -123.785
+      value: -48.053
       objectReference: {fileID: 0}
     - target: {fileID: 3325016123248834336, guid: 84f8cadde2244614c84d96bb30861bd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -3871,7 +3884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2409522888068980084, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2409522888068980084, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3923,7 +3936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6305242153108044668, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 146321483
+      value: 3047602143
       objectReference: {fileID: 0}
     - target: {fileID: 6305242153108044668, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -3934,8 +3947,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7398294190479961541, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.9500012
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398294190479961541, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.9999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398294190479961541, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.7900003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398294190479961541, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.95269215
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398294190479961541, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.303937
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398294190479961541, guid: 659160a460acb4964929b2b5cd5603f7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 35.388
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4384,8 +4417,8 @@ Transform:
   m_GameObject: {fileID: 1943997736126404792}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.8, y: 2.8, z: 2.8}
+  m_LocalPosition: {x: -1.81545, y: 0, z: 3.21749}
+  m_LocalScale: {x: 2.2588637, y: 1.6406877, z: 2.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 46396667338597890}
