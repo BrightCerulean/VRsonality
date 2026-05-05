@@ -581,6 +581,12 @@ MonoBehaviour:
   playerColor: {r: 0.9924528, g: 0, b: 0, a: 1}
   playerColorName: Red
   currentQuestionSet: 2
+  uploadRoomVisitCount: 0
+  fadeCanvasGroup: {fileID: 0}
+  fadeDuration: 0.5
+  audioSource: {fileID: 0}
+  transitionSound: {fileID: 0}
+  selectSound: {fileID: 0}
 --- !u!4 &442025042
 Transform:
   m_ObjectHideFlags: 0
@@ -1057,7 +1063,6 @@ MonoBehaviour:
   sceneName: 
   choiceLetter: 
   portal: {fileID: 0}
-  selectSound: {fileID: 0}
   autoTransition: 0
   nextScene: 
 --- !u!1001 &659161748
@@ -1490,7 +1495,6 @@ MonoBehaviour:
   sceneName: adultbedroom
   choiceLetter: E
   portal: {fileID: 1422440394}
-  selectSound: {fileID: 0}
   autoTransition: 1
   nextScene: museum
 --- !u!65 &797470510
@@ -1692,7 +1696,6 @@ MonoBehaviour:
   sceneName: 
   choiceLetter: 
   portal: {fileID: 0}
-  selectSound: {fileID: 0}
   autoTransition: 0
   nextScene: 
 --- !u!1 &831806873 stripped
@@ -1766,7 +1769,6 @@ MonoBehaviour:
   sceneName: adultbedroom
   choiceLetter: H
   portal: {fileID: 1422440394}
-  selectSound: {fileID: 0}
   autoTransition: 1
   nextScene: museum
 --- !u!65 &831806883
@@ -2870,7 +2872,6 @@ MonoBehaviour:
   sceneName: adultbedroom
   choiceLetter: S
   portal: {fileID: 1422440394}
-  selectSound: {fileID: 0}
   autoTransition: 1
   nextScene: museum
 --- !u!65 &1062593923
@@ -3373,7 +3374,6 @@ MonoBehaviour:
   sceneName: 
   choiceLetter: 
   portal: {fileID: 0}
-  selectSound: {fileID: 0}
   autoTransition: 0
   nextScene: 
 --- !u!1001 &1175679400
@@ -3877,7 +3877,6 @@ MonoBehaviour:
   sceneName: adultbedroom
   choiceLetter: C
   portal: {fileID: 1422440394}
-  selectSound: {fileID: 0}
   autoTransition: 1
   nextScene: museum
 --- !u!1001 &1705373001
@@ -4413,7 +4412,7 @@ PrefabInstance:
     - target: {fileID: 23906796820398656, guid: eded3844e29c2ec40bc278e2cbd31279, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 511f57e6e5794464c8b71f954d63c87f, type: 2}
+      objectReference: {fileID: 2100000, guid: 165ce8be62785f34cbabb4c90f68c57d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5724,6 +5723,7 @@ GameObject:
   - component: {fileID: 4272285730402541459}
   - component: {fileID: 316926390584312812}
   - component: {fileID: 481017300178079156}
+  - component: {fileID: 4893421478912798413}
   m_Layer: 0
   m_Name: GLTFNode1(backwall)
   m_TagString: Untagged
@@ -5731,6 +5731,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &4893421478912798413
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893421478912798412}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3165783739154024506, guid: 9a31daf5935f04b40872022ea81a6721, type: 3}
 --- !u!4 &4894835964437983772
 Transform:
   m_ObjectHideFlags: 0
@@ -5858,6 +5880,7 @@ GameObject:
   - component: {fileID: 8985257884276803100}
   - component: {fileID: 5015130812335200657}
   - component: {fileID: 4929989124681567375}
+  - component: {fileID: 8985257884276803101}
   m_Layer: 0
   m_Name: GLTFNode2(rightWall)
   m_TagString: Untagged
@@ -5891,6 +5914,7 @@ GameObject:
   - component: {fileID: 4894835964437983772}
   - component: {fileID: 4914560088276630888}
   - component: {fileID: 3340684803336865057}
+  - component: {fileID: 6593932093550288546}
   m_Layer: 0
   m_Name: GLTFNode1(frontwall)
   m_TagString: Untagged
@@ -5898,6 +5922,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &6593932093550288546
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593932093550288545}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3165783739154024506, guid: 9a31daf5935f04b40872022ea81a6721, type: 3}
 --- !u!1 &7281216917606302554
 GameObject:
   m_ObjectHideFlags: 0
@@ -5909,6 +5955,7 @@ GameObject:
   - component: {fileID: 4722710947343858250}
   - component: {fileID: 3872631230630078518}
   - component: {fileID: 8057145861050568205}
+  - component: {fileID: 8057145861050568206}
   m_Layer: 0
   m_Name: GLTFNode2(leftwall)
   m_TagString: Untagged
@@ -5982,6 +6029,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8057145861050568206
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281216917606302554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9051892992655394355, guid: 9a31daf5935f04b40872022ea81a6721, type: 3}
 --- !u!4 &8985257884276803100
 Transform:
   m_ObjectHideFlags: 0
@@ -5997,6 +6066,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 46396667338597890}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!64 &8985257884276803101
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5779307007155845553}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9051892992655394355, guid: 9a31daf5935f04b40872022ea81a6721, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Color playerColor = Color.white;
     public string playerColorName = "None";
     public int currentQuestionSet = 1; // 1 = past, 2 = present
+    public int uploadRoomVisitCount = 0;
 
     public static readonly string Scene1 = "toddlerbedroom";
     public static readonly string Scene2 = "playground";
@@ -20,6 +21,10 @@ public class GameManager : MonoBehaviour
 
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 0.5f;
+
+    public AudioSource audioSource;
+    public AudioClip transitionSound;
+    public AudioClip selectSound;
 
     void Awake()
     {
@@ -263,6 +268,10 @@ public class GameManager : MonoBehaviour
         fadeCanvasGroup.gameObject.SetActive(true);
 
         float t = 0f;
+        if (audioSource != null && transitionSound != null)
+        {
+            audioSource.PlayOneShot(transitionSound);
+        }
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
@@ -293,4 +302,17 @@ public class GameManager : MonoBehaviour
         Debug.Log("FADE COMPLETE");
     }
 
+    public void PlaySelectSound()
+    {
+        if (selectSound == null) return;
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+                audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.PlayOneShot(selectSound);
+    }
 }

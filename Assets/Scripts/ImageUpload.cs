@@ -107,7 +107,9 @@ public class ImageUpload : MonoBehaviour
             yield break;
         }
 
-        Texture2D tex = DownloadHandlerTexture.GetContent(request);
+        Texture2D raw = DownloadHandlerTexture.GetContent(request);
+        Texture2D tex = ResizeTexture(raw, 1024);
+        if (tex != raw) Destroy(raw);
         FlipTextureVertically(tex);
 
         if (index < displaySurfaces.Length && displaySurfaces[index] != null)
@@ -126,6 +128,26 @@ public class ImageUpload : MonoBehaviour
             portal.SetActive(true);
             Debug.Log("[ImageUpload] Portal activated");
         }
+    }
+
+    Texture2D ResizeTexture(Texture2D source, int maxSize)
+    {
+        if (source.width <= maxSize && source.height <= maxSize)
+            return source;
+
+        float ratio = (float)source.width / source.height;
+        int newWidth = ratio >= 1 ? maxSize : Mathf.RoundToInt(maxSize * ratio);
+        int newHeight = ratio >= 1 ? Mathf.RoundToInt(maxSize / ratio) : maxSize;
+
+        RenderTexture rt = RenderTexture.GetTemporary(newWidth, newHeight);
+        Graphics.Blit(source, rt);
+        RenderTexture.active = rt;
+        Texture2D resized = new Texture2D(newWidth, newHeight, TextureFormat.RGB24, false);
+        resized.ReadPixels(new Rect(0, 0, newWidth, newHeight), 0, 0);
+        resized.Apply();
+        RenderTexture.active = null;
+        RenderTexture.ReleaseTemporary(rt);
+        return resized;
     }
 
     void FlipTextureVertically(Texture2D tex)
@@ -173,163 +195,3 @@ public class ImageUpload : MonoBehaviour
         }
     }
 }
-
-/*using UnityEngine;
-using UnityEngine.Networking;
-using System.Collections;
-using System.IO;
-
-public class ImageUpload : MonoBehaviour
-{
-    [Header("Display")]
-    public Renderer displaySurface; // drag Quad here in Inspector
-
-    [Header("Portal")]
-    public GameObject portal;
-
-    private bool imageUploaded = false;
-    private string savedImagePath;
-
-    void Start()
-    {
-        // Keep portal inactive until image is uploaded
-        if (portal != null)
-            portal.SetActive(false);
-
-        // Load previously saved image if exists
-        savedImagePath = Path.Combine(
-            Application.persistentDataPath,
-            "playerimage.jpg"
-        );
-
-        if (File.Exists(savedImagePath))
-        {
-            StartCoroutine(LoadSavedImage());
-        }
-    }
-
-    // Call this from your raycast interaction
-    public void OnSelect()
-    {
-        if (!imageUploaded)
-        {
-            OpenGallery();
-        }
-        else
-        {
-            Debug.Log("[ImageUpload] Image already uploaded");
-        }
-    }
-
-    void OpenGallery()
-    {
-
-        NativeGallery.GetImageFromGallery((path) =>
-        {
-            if (path == null)
-            {
-                Debug.Log("[ImageUpload] No image selected");
-                return;
-            }
-
-            Debug.Log("[ImageUpload] Image selected: " + path);
-            StartCoroutine(LoadAndDisplayImage(path));
-
-        }, "Select your photo", "image/*");
-
-        Debug.Log("[ImageUpload] Gallery permission: ");
-    }
-
-    IEnumerator LoadAndDisplayImage(string path)
-    {
-        // Load image using NativeGallery
-        Texture2D tex = NativeGallery.LoadImageAtPath(path, 512);
-
-        if (tex == null)
-        {
-            Debug.LogError("[ImageUpload] Failed to load image");
-            yield break;
-        }
-
-        // Display on Quad
-        if (displaySurface != null)
-            displaySurface.material.mainTexture = tex;
-
-        // Make texture readable before encoding
-        Texture2D readableTex = new Texture2D(tex.width, tex.height, tex.format, false);
-        Graphics.CopyTexture(tex, readableTex);
-        byte[] bytes = readableTex.EncodeToJPG();
-        File.WriteAllBytes(savedImagePath, bytes);
-        Debug.Log("[ImageUpload] Image saved to: " + savedImagePath);
-
-        imageUploaded = true;
-
-        // Flip texture vertically
-        Color[] pixels = tex.GetPixels();
-        System.Array.Reverse(pixels);
-        tex.SetPixels(pixels);
-        tex.Apply();
-
-        // Activate portal to pastroom
-        if (portal != null)
-        {
-            portal.SetActive(true);
-            Debug.Log("[ImageUpload] Portal activated");
-        }
-
-        yield return null;
-    }
-
-    IEnumerator LoadSavedImage()
-    {
-        string path = "file://" + savedImagePath;
-
-        UnityWebRequest request =
-            UnityWebRequestTexture.GetTexture(path);
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            Texture2D tex =
-                DownloadHandlerTexture.GetContent(request);
-            if (displaySurface != null)
-                displaySurface.material.mainTexture = tex;
-
-            imageUploaded = true;
-
-            if (portal != null)
-                portal.SetActive(true);
-
-            Debug.Log("[ImageUpload] Saved image loaded");
-        }
-        else
-        {
-            Debug.LogError("[ImageUpload] Failed to load saved image: "
-                + request.error);
-        }
-    }
-
-    // Call this from other scenes to display the uploaded image
-    public static IEnumerator DisplaySavedImage(Renderer target)
-    {
-        string path = "file://" + Path.Combine(
-            Application.persistentDataPath,
-            "playerimage.jpg"
-        );
-
-        UnityWebRequest request =
-            UnityWebRequestTexture.GetTexture(path);
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            target.material.mainTexture =
-                DownloadHandlerTexture.GetContent(request);
-            Debug.Log("[ImageUpload] Image displayed in scene");
-        }
-        else
-        {
-            Debug.LogError("[ImageUpload] Error: " + request.error);
-        }
-    }
-}*/
