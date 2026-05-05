@@ -15,19 +15,11 @@ public class Portal : MonoBehaviour
         if (other.transform.root.CompareTag("Player"))
         {
             transitioning = true;
-            StartCoroutine(LoadWithSound());
+            if (GameManager.Instance != null)
+                GameManager.Instance.TransitionToScene(sceneToLoad);
+            else
+                SceneManager.LoadScene(sceneToLoad);
         }
     }
 
-    IEnumerator LoadWithSound()
-    {
-        if (transitionSound != null)
-        {
-            AudioSource audio = GetComponent<AudioSource>();
-            if (audio == null) audio = gameObject.AddComponent<AudioSource>();
-            audio.PlayOneShot(transitionSound);
-            yield return new WaitForSeconds(transitionSound.length);
-        }
-        GameManager.Instance.TransitionToScene(sceneToLoad);
-    }
 }

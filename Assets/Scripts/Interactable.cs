@@ -14,17 +14,12 @@ public class Interactable : MonoBehaviour
     private bool isSelected = false;
     private bool isLocked = false;
     public GameObject portal;
-    public AudioClip selectSound;
-    private AudioSource audioSource;
     public bool autoTransition = false;
     public string nextScene;
     private bool transitioning = false;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
         if (GameManager.Instance == null) return;
         string selected = GameManager.Instance.GetSelectionForScene(sceneName);
         if (selected != null)
@@ -92,10 +87,8 @@ public class Interactable : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.AddSelection(sceneName, choiceLetter);
+            GameManager.Instance.PlaySelectSound();
         }
-
-        if (selectSound != null && audioSource != null)
-            audioSource.PlayOneShot(selectSound);
 
         if (autoTransition)
         {
@@ -115,7 +108,10 @@ public class Interactable : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         Debug.Log("[Interactable] Loading scene: " + nextScene);
-        GameManager.Instance.TransitionToScene(nextScene);
+        if (GameManager.Instance != null)
+            GameManager.Instance.TransitionToScene(nextScene);
+        else
+            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
     public void Lock()
     {
