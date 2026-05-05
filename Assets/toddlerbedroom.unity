@@ -502,6 +502,7 @@ MonoBehaviour:
   playerColor: {r: 0.9924528, g: 0, b: 0, a: 1}
   playerColorName: Red
   currentQuestionSet: 1
+  uploadRoomVisitCount: 0
   fadeCanvasGroup: {fileID: 0}
   fadeDuration: 0.5
 --- !u!4 &442025042
@@ -749,8 +750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29c457107ed64cc985c2e4369a7720d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTrigger
-  sceneToLoad: playground
-  transitionSound: {fileID: 0}
 --- !u!1 &777761351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,8 +1564,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29c457107ed64cc985c2e4369a7720d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTrigger
-  sceneToLoad: playground
-  transitionSound: {fileID: 0}
 --- !u!1 &1642165798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,8 +1727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29c457107ed64cc985c2e4369a7720d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTrigger
-  sceneToLoad: playground
-  transitionSound: {fileID: 0}
 --- !u!1 &1697731329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,8 +2068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29c457107ed64cc985c2e4369a7720d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTrigger
-  sceneToLoad: playground
-  transitionSound: {fileID: 0}
 --- !u!1 &2101253996
 GameObject:
   m_ObjectHideFlags: 0
