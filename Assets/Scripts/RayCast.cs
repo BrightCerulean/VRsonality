@@ -103,6 +103,12 @@ public class RayCast : MonoBehaviour
                 hitDot.SetActive(true);
                 hitDot.transform.position = hit.point + hit.normal * 0.02f;
                 hitDot.transform.rotation = Quaternion.LookRotation(-hit.normal);
+                if (GameManager.Instance != null)
+                {
+                    Renderer dotRenderer = hitDot.GetComponent<Renderer>();
+                    if (dotRenderer != null)
+                        dotRenderer.material.color = GameManager.Instance.playerColor;
+                }
             }
             // Hover highlight
             HoverHighlight newHighlight = hit.collider.GetComponentInParent<HoverHighlight>();

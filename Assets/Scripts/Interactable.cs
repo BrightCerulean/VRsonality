@@ -115,7 +115,10 @@ public class Interactable : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         Debug.Log("[Interactable] Loading scene: " + nextScene);
-        GameManager.Instance.TransitionToScene(nextScene);
+        if (GameManager.Instance != null)
+            GameManager.Instance.TransitionToScene(nextScene);
+        else
+            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
     public void Lock()
     {

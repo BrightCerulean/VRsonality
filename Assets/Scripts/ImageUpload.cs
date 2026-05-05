@@ -32,8 +32,14 @@ public class ImageUpload : MonoBehaviour
             );
 
             if (File.Exists(savedImagePaths[i]))
+            {
                 StartCoroutine(LoadSavedImage(i));
+                currentImageIndex = i + 1;
+            }
         }
+
+        if (portal != null && currentImageIndex >= 1)
+            portal.SetActive(true);
     }
 
     public void OnSelect()
@@ -46,18 +52,6 @@ public class ImageUpload : MonoBehaviour
 
     void OpenGallery()
     {
-        bool hasPermission = NativeGallery.CheckPermission(
-            NativeGallery.PermissionType.Read,
-            NativeGallery.MediaType.Image
-        );
-
-        if (!hasPermission)
-        {
-            Debug.LogWarning("[ImageUpload] Gallery permission denied");
-            StartCoroutine(ShowMessage("Gallery access denied. Please allow photo access in settings."));
-            return;
-        }
-
         try
         {
             NativeGallery.GetImageFromGallery((path) =>
@@ -90,44 +84,49 @@ public class ImageUpload : MonoBehaviour
 
     IEnumerator LoadAndDisplayImage(string path, int index)
     {
-        Texture2D tex = NativeGallery.LoadImageAtPath(path, 512);
+        string url = path.StartsWith("file://") ? path : "file://" + path;
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+        yield return request.SendWebRequest();
 
-        if (tex == null)
+        if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("[ImageUpload] Failed to load image");
+            Debug.LogError("[ImageUpload] Failed to load image: " + request.error);
             StartCoroutine(ShowMessage("Failed to load image. Please try a different photo."));
             yield break;
         }
 
-        // Make readable using RenderTexture
-        RenderTexture rt = RenderTexture.GetTemporary(tex.width, tex.height);
-        Graphics.Blit(tex, rt);
-        RenderTexture previous = RenderTexture.active;
-        RenderTexture.active = rt;
-        Texture2D readableTex = new Texture2D(tex.width, tex.height);
-        readableTex.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
-        readableTex.Apply();
-        RenderTexture.active = previous;
-        RenderTexture.ReleaseTemporary(rt);
+        Texture2D tex = DownloadHandlerTexture.GetContent(request);
+        FlipTextureVertically(tex);
 
-        // Display on correct frame
         if (index < displaySurfaces.Length && displaySurfaces[index] != null)
-            displaySurfaces[index].material.mainTexture = readableTex;
+            displaySurfaces[index].material.mainTexture = tex;
 
-        // Save image
-        byte[] bytes = readableTex.EncodeToJPG();
+        byte[] bytes = tex.EncodeToJPG();
         File.WriteAllBytes(savedImagePaths[index], bytes);
         Debug.Log("[ImageUpload] Image " + index + " saved");
 
         currentImageIndex++;
+
+        StartCoroutine(ShowMessage("Photo " + currentImageIndex + " uploaded successfully!"));
 
         if (portal != null && currentImageIndex >= 1)
         {
             portal.SetActive(true);
             Debug.Log("[ImageUpload] Portal activated");
         }
+    }
 
-        yield return null;
+    void FlipTextureVertically(Texture2D tex)
+    {
+        Color[] pixels = tex.GetPixels();
+        int width = tex.width;
+        int height = tex.height;
+        Color[] flipped = new Color[pixels.Length];
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+                flipped[y * width + x] = pixels[(height - 1 - y) * width + x];
+        tex.SetPixels(flipped);
+        tex.Apply();
     }
 
     IEnumerator LoadSavedImage(int index)
