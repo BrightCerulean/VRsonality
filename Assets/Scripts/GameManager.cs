@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,11 +28,36 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            ClearSavedImages();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void ClearSavedImages()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            string path = Path.Combine(Application.persistentDataPath, "playerimage_" + i + ".jpg");
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Debug.Log("[GameManager] Cleared saved image: " + path);
+            }
+        }
+    }
+
+    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(FadeInRoutine());
     }
 
     public void AddSelection(string sceneName, string letter)
@@ -118,7 +144,6 @@ public class GameManager : MonoBehaviour
         return selections.ContainsKey(sceneName);
     }
 
-
     public void ResetSelections()
     {
         selections.Clear();
@@ -146,29 +171,29 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator FadeAndLoad(string sceneName)
     {
-        Debug.Log("FADE OUT START");
-
-        fadeCanvasGroup.gameObject.SetActive(true);
-
-        float t = 0f;
-        while (t < fadeDuration)
+        if (fadeCanvasGroup != null)
         {
-            t += Time.deltaTime;
-            fadeCanvasGroup.alpha = Mathf.Lerp(0, 1, t / fadeDuration);
-            yield return null;
+            fadeCanvasGroup.gameObject.SetActive(true);
+            float t = 0f;
+            while (t < fadeDuration)
+            {
+                t += Time.deltaTime;
+                fadeCanvasGroup.alpha = Mathf.Lerp(0, 1, t / fadeDuration);
+                yield return null;
+            }
+            fadeCanvasGroup.alpha = 1f;
         }
 
+        SceneManager.LoadScene(sceneName);
+    }
+
+    private IEnumerator FadeInRoutine()
+    {
+        if (fadeCanvasGroup == null) yield break;
+        fadeCanvasGroup.gameObject.SetActive(true);
         fadeCanvasGroup.alpha = 1f;
 
-        Debug.Log("LOADING SCENE: " + sceneName);
-
-        SceneManager.LoadScene(sceneName);
-
-        yield return null;
-
-        Debug.Log("FADE IN START");
-
-        t = 0f;
+        float t = 0f;
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
@@ -177,8 +202,7 @@ public class GameManager : MonoBehaviour
         }
 
         fadeCanvasGroup.alpha = 0f;
-
-        Debug.Log("FADE COMPLETE");
+        fadeCanvasGroup.gameObject.SetActive(false);
     }
 
 }
