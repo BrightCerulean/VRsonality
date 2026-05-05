@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 0.5f;
 
+    public AudioSource audioSource;
+    public AudioClip transitionSound;
+    public AudioClip selectSound;
     void Awake()
     {
         if (Instance == null)
@@ -283,6 +286,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator FadeAndLoad(string sceneName)
     {
+        if (audioSource != null && transitionSound != null)
+        {
+            audioSource.PlayOneShot(transitionSound);
+        }
         if (fadeCanvasGroup != null)
         {
             fadeCanvasGroup.gameObject.SetActive(true);
@@ -316,5 +323,17 @@ public class GameManager : MonoBehaviour
         fadeCanvasGroup.alpha = 0f;
         fadeCanvasGroup.gameObject.SetActive(false);
     }
+    public void PlaySelectSound()
+    {
+        if (selectSound == null) return;
 
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+                audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.PlayOneShot(selectSound);
+    }
 }
