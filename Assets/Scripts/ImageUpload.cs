@@ -11,6 +11,8 @@ public class ImageUpload : MonoBehaviour
 
     [Header("Portal")]
     public GameObject portal;
+    public string firstVisitScene = "toddlerbedroom";
+    public string secondVisitScene = "partyroom";
 
     [Header("Status")]
     public TextMeshProUGUI statusText;
@@ -40,6 +42,16 @@ public class ImageUpload : MonoBehaviour
 
         if (portal != null && currentImageIndex >= 1)
             portal.SetActive(true);
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.uploadRoomVisitCount++;
+
+        Portal portalScript = portal != null ? portal.GetComponent<Portal>() : null;
+        if (portalScript != null)
+        {
+            bool secondVisit = GameManager.Instance != null && GameManager.Instance.uploadRoomVisitCount >= 2;
+            portalScript.sceneToLoad = secondVisit ? secondVisitScene : firstVisitScene;
+        }
     }
 
     public void OnSelect()

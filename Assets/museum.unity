@@ -1372,6 +1372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Portal
   sceneToLoad: uploadroom
   transitionSound: {fileID: 0}
+  markSecondUploadVisit: 1
 --- !u!114 &448453592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1914,6 +1915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Portal
   sceneToLoad: uploadroom
   transitionSound: {fileID: 0}
+  markSecondUploadVisit: 0
 --- !u!114 &746617879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2489,6 +2491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Portal
   sceneToLoad: resultsroom
   transitionSound: {fileID: 0}
+  markSecondUploadVisit: 0
 --- !u!1 &1473706774 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1534469393933210, guid: b5a5a17dc3a6d9e47bd468828a2dec34, type: 3}
@@ -2555,6 +2558,7 @@ MonoBehaviour:
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   playerColorName: None
   currentQuestionSet: 1
+  isSecondUploadVisit: 0
   fadeCanvasGroup: {fileID: 296492311}
   fadeDuration: 0.5
 --- !u!4 &1683899116

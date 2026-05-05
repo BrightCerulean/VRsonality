@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Color playerColor = Color.white;
     public string playerColorName = "None";
     public int currentQuestionSet = 1; // 1 = past, 2 = present
+    public int uploadRoomVisitCount = 0;
 
     public static readonly string Scene1 = "toddlerbedroom";
     public static readonly string Scene2 = "playground";
