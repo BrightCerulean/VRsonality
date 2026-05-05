@@ -802,10 +802,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 075ff493-5b80-4414-a27e-6d1d446668d6
+  cloudProjectId: 017eaca9-ea53-4c14-ab28-b44c78c7940e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: VRsonality (1)
+  projectName: VRsonality
   organizationId: unity_40c49a69b6e19219186c
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
