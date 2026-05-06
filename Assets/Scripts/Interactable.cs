@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-
+using Photon.Pun;
 public class Interactable : MonoBehaviour
 {
     public Outline outline;
@@ -101,17 +101,35 @@ public class Interactable : MonoBehaviour
             StartCoroutine(LoadNextScene());
         }
         else
-            portal.SetActive(true);
+        {
+            if (portal != null)
+                portal.SetActive(true);
+            else
+                Debug.LogWarning("[Interactable] autoTransition is false but no portal assigned.");
+        }
     }
 
     private IEnumerator LoadNextScene()
     {
         yield return new WaitForSeconds(0.1f);
+
+        GameObject rig = GameObject.Find("XRCardboardRig");
+        if (rig != null)
+        {
+            rig.transform.SetParent(null);
+            DontDestroyOnLoad(rig);
+        }
+
+        PlayerAvatar myAvatar = FindFirstObjectByType<PlayerAvatar>();
+        if (myAvatar != null && myAvatar.photonView.IsMine)
+            PhotonNetwork.Destroy(myAvatar.gameObject);
+
         Debug.Log("[Interactable] Loading scene: " + nextScene);
+
         if (GameManager.Instance != null)
             GameManager.Instance.TransitionToScene(nextScene);
         else
-            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+            SceneManager.LoadScene(nextScene);
     }
     public void Lock()
     {
