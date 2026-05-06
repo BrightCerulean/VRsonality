@@ -107,7 +107,9 @@ public class ImageUpload : MonoBehaviour
             yield break;
         }
 
-        Texture2D tex = DownloadHandlerTexture.GetContent(request);
+        Texture2D raw = DownloadHandlerTexture.GetContent(request);
+        Texture2D tex = ResizeTexture(raw, 1024);
+        if (tex != raw) Destroy(raw);
         FlipTextureVertically(tex);
 
         if (index < displaySurfaces.Length && displaySurfaces[index] != null)
@@ -126,6 +128,26 @@ public class ImageUpload : MonoBehaviour
             portal.SetActive(true);
             Debug.Log("[ImageUpload] Portal activated");
         }
+    }
+
+    Texture2D ResizeTexture(Texture2D source, int maxSize)
+    {
+        if (source.width <= maxSize && source.height <= maxSize)
+            return source;
+
+        float ratio = (float)source.width / source.height;
+        int newWidth  = ratio >= 1 ? maxSize : Mathf.RoundToInt(maxSize * ratio);
+        int newHeight = ratio >= 1 ? Mathf.RoundToInt(maxSize / ratio) : maxSize;
+
+        RenderTexture rt = RenderTexture.GetTemporary(newWidth, newHeight);
+        Graphics.Blit(source, rt);
+        RenderTexture.active = rt;
+        Texture2D resized = new Texture2D(newWidth, newHeight, TextureFormat.RGB24, false);
+        resized.ReadPixels(new Rect(0, 0, newWidth, newHeight), 0, 0);
+        resized.Apply();
+        RenderTexture.active = null;
+        RenderTexture.ReleaseTemporary(rt);
+        return resized;
     }
 
     void FlipTextureVertically(Texture2D tex)
