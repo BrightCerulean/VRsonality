@@ -31,6 +31,7 @@ public class RayCast : MonoBehaviour
             lineRenderer.numCornerVertices = 8;
             lineRenderer.alignment = LineAlignment.View;
             lineRenderer.useWorldSpace = true;
+            lineRenderer.enabled = false;
         }
         else
         {
@@ -58,12 +59,6 @@ public class RayCast : MonoBehaviour
     {
         if (!raycastEnabled)
         {
-            if (lineRenderer != null)
-            {
-                lineRenderer.SetPosition(0, mainCamera.transform.position);
-                lineRenderer.SetPosition(1, mainCamera.transform.position);
-            }
-
             if (hitDot != null)
                 hitDot.SetActive(false);
 
@@ -77,27 +72,16 @@ public class RayCast : MonoBehaviour
         smoothedDirection = Vector3.Slerp(smoothedDirection, mainCamera.transform.forward, aimSmoothing);
         Vector3 direction = smoothedDirection;
 
-        if (lineRenderer != null && GameManager.Instance != null)
-        {
-            Color pc = GameManager.Instance.playerColor;
-            pc.a = 1f;
-            lineRenderer.startColor = pc;
-            Color fade = pc;
-            fade.a = 0.5f;
-            lineRenderer.endColor = fade;
-        }
+        if (lineRenderer != null)
+            lineRenderer.enabled = false;
 
         RaycastHit hit;
 
         int layerMask = raycastMask & ~LayerMask.GetMask("Character", "Ignore Raycast");
         bool didHit = Physics.Raycast(origin, direction, out hit, maxDistance, layerMask);
-        //Debug.Log("LayerMask value: " + layerMask);
+        Debug.Log("LayerMask value: " + layerMask);
         if (didHit)
         {
-            lineRenderer.SetPosition(0, origin);
-            lineRenderer.SetPosition(1, hit.point);
-
-            // Show hit dot
             if (hitDot != null)
             {
                 hitDot.SetActive(true);
@@ -110,9 +94,8 @@ public class RayCast : MonoBehaviour
                         dotRenderer.material.color = GameManager.Instance.playerColor;
                 }
             }
-            // Hover highlight
             HoverHighlight newHighlight = hit.collider.GetComponentInParent<HoverHighlight>();
-            //Debug.Log("[RayCast] HoverHighlight found: " + (newHighlight != null ? newHighlight.gameObject.name : "NULL"));
+            Debug.Log("[RayCast] HoverHighlight found: " + (newHighlight != null ? newHighlight.gameObject.name : "NULL"));
 
             if (currentHighlight != newHighlight)
             {

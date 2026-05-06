@@ -3115,10 +3115,6 @@ PrefabInstance:
       propertyPath: hitDot
       value: 
       objectReference: {fileID: 1843356294}
-    - target: {fileID: 8665810151519939098, guid: 576772bcfda7a36409511933b2a6a46d, type: 3}
-      propertyPath: raycastEnabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8836698495362172890, guid: 576772bcfda7a36409511933b2a6a46d, type: 3}
       propertyPath: m_Name
       value: XRCardboardRig
