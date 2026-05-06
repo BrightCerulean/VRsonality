@@ -24,7 +24,16 @@ public class MapBlueToothKey : MonoBehaviour
 
         if (Input.anyKey)
         {
-            //Debug.Log("Bluetooth Key detected");
+            if (Input.anyKeyDown)
+            {
+                for (int i = 0; i < 20; i++)
+                {
+                    if (Input.GetKeyDown("joystick button " + i))
+                    {
+                        Debug.Log("DETECTION: This button is actually -> joystick button " + i);
+                    }
+                }
+            }
             TextMeshPro tm = jsKeyText.GetComponent<TextMeshPro>();
             tm.text = "Bluetooth Key:\n";
             for (int i = 0; i < js_buttons.Length; i++)
@@ -34,7 +43,7 @@ public class MapBlueToothKey : MonoBehaviour
                     tm.text += string.Format("joystick button {0}\n", js_buttons[i]); ;
                 }
 
-                
+
             }
             if (Input.GetButton("Submit"))
             {
@@ -50,7 +59,7 @@ public class MapBlueToothKey : MonoBehaviour
                 tm.text += string.Format("Jump \n"); ;
             }
 
-            if(Input.GetAxis("Joystick Axis 1") != 0)
+            if (Input.GetAxis("Joystick Axis 1") != 0)
             {
                 tm.text += string.Format("Joystick Axis 1: {0}\n", Input.GetAxis("Joystick Axis 1")); ;
             }
