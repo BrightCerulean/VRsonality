@@ -14,9 +14,16 @@ public class QuestionPanel : MonoBehaviour
 
     void Start()
     {
+        if (playerCamera == null)
+        {
+            if (Camera.main != null)
+                playerCamera = Camera.main.transform;
+            else
+                Debug.LogWarning("[QuestionPanel] No camera found.");
+        }
+
         autoRoutine = StartCoroutine(AutoShowRoutine());
     }
-
     void LateUpdate()
     {
         //Autoface player
@@ -34,23 +41,20 @@ public class QuestionPanel : MonoBehaviour
 
     IEnumerator AutoShowRoutine()
     {
-        //Question appears on start then disappears after some time
         isVisible = true;
         gameObject.SetActive(true);
-        raycast.raycastEnabled = false;
+        if (raycast != null) raycast.raycastEnabled = false;
 
         float timer = 0f;
         while (timer < displayTime)
         {
-            if (isToggledOpen) yield break; // stop auto-hide if player took control
+            if (isToggledOpen) yield break;
             timer += Time.deltaTime;
             yield return null;
         }
 
         if (!isToggledOpen)
-        {
             HidePanel();
-        }
     }
 
     public void TogglePanel()
@@ -65,24 +69,21 @@ public class QuestionPanel : MonoBehaviour
         }
     }
 
-    void ShowPanelManual()
-    {
-        isToggledOpen = true;
-        isVisible = true;
-
-        if (autoRoutine != null)
-            StopCoroutine(autoRoutine);
-
-        gameObject.SetActive(true);
-        raycast.raycastEnabled = false;
-    }
-
     void HidePanel()
     {
         isToggledOpen = false;
         isVisible = false;
-
         gameObject.SetActive(false);
-        raycast.raycastEnabled = true;
+        if (raycast != null) raycast.raycastEnabled = true;
+    }
+
+    void ShowPanelManual()
+    {
+        isToggledOpen = true;
+        isVisible = true;
+        if (autoRoutine != null)
+            StopCoroutine(autoRoutine);
+        gameObject.SetActive(true);
+        if (raycast != null) raycast.raycastEnabled = false;
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using Photon.Pun;
 
 public class StartButton : MonoBehaviour
 {
@@ -58,6 +59,22 @@ public class StartButton : MonoBehaviour
             audio.PlayOneShot(transitionSound);
             yield return new WaitForSeconds(transitionSound.length);
         }
+
+        GameObject rig = GameObject.Find("XRCardboardRig");
+        if (rig != null)
+        {
+            rig.transform.SetParent(null);
+            DontDestroyOnLoad(rig);
+        }
+        else
+        {
+            Debug.LogWarning("[StartButton] XRCardboardRig not found before scene load!");
+        }
+
+        PlayerAvatar myAvatar = FindFirstObjectByType<PlayerAvatar>();
+        if (myAvatar != null && myAvatar.photonView.IsMine)
+            PhotonNetwork.Destroy(myAvatar.gameObject);
+
         SceneManager.LoadScene(sceneToLoad);
     }
 }

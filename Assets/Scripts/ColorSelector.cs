@@ -1,4 +1,6 @@
 using UnityEngine;
+using Photon.Pun;
+using ExitGames.Client.Photon;
 
 public class ColorSelector : MonoBehaviour
 {
@@ -43,6 +45,18 @@ public class ColorSelector : MonoBehaviour
         GameManager.Instance.SetPlayerColor(color, colorName);
         Debug.Log($"Color selected: {colorName}");
 
+        if (PhotonNetwork.IsConnected)
+        {
+            Hashtable props = new Hashtable
+            {
+                { "colorR",    color.r    },
+                { "colorG",    color.g    },
+                { "colorB",    color.b    },
+                { "colorName", colorName  }
+            };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        }
+        Debug.Log($"Color selected: {colorName}");
         // Hide pick canvas, show start canvas
         Debug.Log($"[ColorSelector] pickCanvas={(pickCanvas != null ? pickCanvas.name : "NULL")} startCanvas={(startCanvas != null ? startCanvas.name : "NULL")}");
         if (pickCanvas != null)
