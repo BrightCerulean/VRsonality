@@ -34,4 +34,12 @@ public class HoverText : MonoBehaviour
             textComponent.outlineWidth = 0f;
         }
     }
+    public string GetText()
+    {
+        if (textComponent != null)
+            return textComponent.text;
+
+        return "";
+    }
 }
+

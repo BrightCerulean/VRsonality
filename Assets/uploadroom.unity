@@ -1891,7 +1891,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6247577496211444903, guid: 82ae611a110b94a808d9b0b8e68d65f4, type: 3}
       propertyPath: m_text
-      value: Upload images from your gallery
+      value: 'Upload images from your gallery
+
+        Use the button in the middle
+        of the room to start uploading'
       objectReference: {fileID: 0}
     - target: {fileID: 6247577496211444903, guid: 82ae611a110b94a808d9b0b8e68d65f4, type: 3}
       propertyPath: m_fontSize

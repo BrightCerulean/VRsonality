@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     private Dictionary<string, string> selections =
         new Dictionary<string, string>();
 
+    private Dictionary<string, string> choiceTexts =
+    new Dictionary<string, string>();
+
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 0.5f;
 
@@ -46,6 +49,13 @@ public class GameManager : MonoBehaviour
             selections[sceneName] = letter;
             Debug.Log("[GameManager] Scene: " + sceneName +
                 " → Letter: " + letter);
+        }
+    }
+    public void AddChoiceText(string sceneName, string choiceText)
+    {
+        if (!choiceTexts.ContainsKey(sceneName))
+        {
+            choiceTexts[sceneName] = choiceText;
         }
     }
 
@@ -314,5 +324,36 @@ public class GameManager : MonoBehaviour
         }
 
         audioSource.PlayOneShot(selectSound);
+    }
+    public string GetChoiceSummary()
+    {
+        string summary = "";
+
+        summary += "Toddler Bedroom: " +
+            choiceTexts[Scene1] + "\n";
+
+        summary += "Playground: " +
+            choiceTexts[Scene2] + "\n";
+
+        summary += "Past Archetype: " +
+            LetterToArchetype(GetPastLetter()) + "\n\n";
+
+        summary += "Party Room: " +
+            choiceTexts[Scene3] + "\n";
+
+        summary += "Adult Bedroom: " +
+            choiceTexts[Scene4] + "\n";
+
+        summary += "Present Archetype: " +
+            LetterToArchetype(GetPresentLetter()) + "\n\n";
+
+        summary += "Future Archetype: " +
+            LetterToArchetype(GetPastLetter()) +
+            " → " +
+            LetterToArchetype(GetPresentLetter()) +
+            " = " +
+            GetResult();
+
+        return summary;
     }
 }
