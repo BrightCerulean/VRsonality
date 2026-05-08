@@ -3,6 +3,8 @@ using ExitGames.Client.Photon;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerAvatar : MonoBehaviourPun, IPunObservable
 {
@@ -35,7 +37,6 @@ public class PlayerAvatar : MonoBehaviourPun, IPunObservable
                 Debug.LogWarning("[PlayerAvatar] XRCardboardRig not found in scene.");
             }
 
-            // Broadcast starting scene
             Hashtable props = new Hashtable
             { { "scene", SceneManager.GetActiveScene().name } };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
@@ -45,6 +46,7 @@ public class PlayerAvatar : MonoBehaviourPun, IPunObservable
             _networkPosition = transform.position;
             _networkRotation = transform.rotation;
             RefreshVisibility();
+            StartCoroutine(RetryVisibility()); 
         }
     }
     void Update()
@@ -90,6 +92,11 @@ public class PlayerAvatar : MonoBehaviourPun, IPunObservable
         float b = props.ContainsKey("colorB") ? (float)props["colorB"] : 1f;
 
         headRenderer.material.color = new Color(r, g, b);
+    }
+    IEnumerator RetryVisibility()
+    {
+        yield return new WaitForSeconds(1f); 
+        RefreshVisibility();
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

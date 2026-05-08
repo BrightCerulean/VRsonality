@@ -43,6 +43,9 @@ public class PhotonMultiplayerManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Log($"{newPlayer.NickName} joined.");
+        Hashtable props = new Hashtable
+        { { "scene", SceneManager.GetActiveScene().name } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -110,6 +113,9 @@ public class PhotonMultiplayerManager : MonoBehaviourPunCallbacks
 
         _avatarSpawned = false;
         SpawnAvatar();
+
+        foreach (var avatar in FindObjectsByType<PlayerAvatar>(FindObjectsSortMode.None))
+            avatar.RefreshVisibility();
 
         Log($"Respawned avatar in {scene.name}");
     }

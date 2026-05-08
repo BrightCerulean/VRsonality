@@ -3,8 +3,10 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.IO;
 using TMPro;
+using Photon.Pun;
+using ExitGames.Client.Photon;
 
-public class ImageUpload : MonoBehaviour
+public class ImageUpload : MonoBehaviourPun
 {
     [Header("Display")]
     public Renderer[] displaySurfaces; // drag 4 frames here in Inspector
@@ -117,17 +119,28 @@ public class ImageUpload : MonoBehaviour
 
         byte[] bytes = tex.EncodeToJPG();
         File.WriteAllBytes(savedImagePaths[index], bytes);
-        Debug.Log("[ImageUpload] Image " + index + " saved");
+
+        photonView.RPC("RPC_ReceiveImage", RpcTarget.Others, bytes, index);
 
         currentImageIndex++;
-
         StartCoroutine(ShowMessage("Photo " + currentImageIndex + " uploaded successfully!"));
 
         if (portal != null && currentImageIndex >= 1)
-        {
             portal.SetActive(true);
-            Debug.Log("[ImageUpload] Portal activated");
-        }
+    }
+
+    [PunRPC]
+    void RPC_ReceiveImage(byte[] imageBytes, int index)
+    {
+        Texture2D tex = new Texture2D(2, 2);
+        tex.LoadImage(imageBytes); 
+
+        if (index < displaySurfaces.Length && displaySurfaces[index] != null)
+            displaySurfaces[index].material.mainTexture = tex;
+
+        File.WriteAllBytes(savedImagePaths[index], imageBytes);
+
+        Debug.Log($"[ImageUpload] Received image {index} from another player");
     }
 
     Texture2D ResizeTexture(Texture2D source, int maxSize)
