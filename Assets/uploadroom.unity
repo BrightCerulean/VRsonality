@@ -1037,11 +1037,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb0a006e0f4a4a9cba6a527cd26effc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImageUpload
-  displaySurfaces: []
-  portal: {fileID: 0}
+  displaySurfaces:
+  - {fileID: 70327866}
+  - {fileID: 764804805}
+  - {fileID: 1866312151}
+  - {fileID: 183134120}
+  portal: {fileID: 252846295}
   firstVisitScene: toddlerbedroom
   secondVisitScene: partyroom
-  statusText: {fileID: 0}
+  statusText: {fileID: 1274314627}
   messageDuration: 3
 --- !u!64 &827903921
 MeshCollider:
@@ -1905,6 +1909,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82ae611a110b94a808d9b0b8e68d65f4, type: 3}
+--- !u!114 &1274314627 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6247577496211444903, guid: 82ae611a110b94a808d9b0b8e68d65f4, type: 3}
+  m_PrefabInstance: {fileID: 1274314626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1534745817 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8981945778558357540, guid: 3a9d095532eb444858840499cdd2cbae, type: 3}
