@@ -35,7 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/adultbedroom.unity
     guid: bddecf598faaf954aa7f45032c4aac41
-  - enabled: 1
+  - enabled: 0
     path: Assets/uploadroom2.unity
     guid: d52647cc6480fc443b61b1ccb46e58ad
   - enabled: 1

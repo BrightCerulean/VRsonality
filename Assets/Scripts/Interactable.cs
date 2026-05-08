@@ -87,6 +87,7 @@ public class Interactable : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.AddSelection(sceneName, choiceLetter);
+            GameManager.Instance.AddChoiceText(sceneName, hoverText.GetText());
             GameManager.Instance.PlaySelectSound();
         }
 
