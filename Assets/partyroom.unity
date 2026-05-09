@@ -4036,6 +4036,7 @@ GameObject:
   - component: {fileID: 5132773820802114482}
   - component: {fileID: 122836970855152872}
   - component: {fileID: 3080222366448229358}
+  - component: {fileID: 5132773820802114483}
   m_Layer: 0
   m_Name: GLTFNode0(floor)
   m_TagString: Untagged
@@ -4224,6 +4225,7 @@ GameObject:
   - component: {fileID: 6254155223865904209}
   - component: {fileID: 456769355666196238}
   - component: {fileID: 4054501964313931606}
+  - component: {fileID: 6254155223865904210}
   m_Layer: 0
   m_Name: GLTFNode0(ceiling)
   m_TagString: Untagged
@@ -4257,6 +4259,7 @@ GameObject:
   - component: {fileID: 4272285730402541459}
   - component: {fileID: 316926390584312812}
   - component: {fileID: 481017300178079156}
+  - component: {fileID: 4893421478912798413}
   m_Layer: 0
   m_Name: GLTFNode1(backwall)
   m_TagString: Untagged
@@ -4264,6 +4267,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &4893421478912798413
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4893421478912798412}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &4894835964437983772
 Transform:
   m_ObjectHideFlags: 0
@@ -4359,6 +4383,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 46396667338597890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5132773820802114483
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943997736126404792}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 0}
+  m_Center: {x: -0.00000011920929, y: 0, z: 3.5527137e-15}
 --- !u!65 &5243001959751284181
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4391,6 +4436,7 @@ GameObject:
   - component: {fileID: 8985257884276803100}
   - component: {fileID: 5015130812335200657}
   - component: {fileID: 4929989124681567375}
+  - component: {fileID: 8985257884276803101}
   m_Layer: 0
   m_Name: GLTFNode2(rightWall)
   m_TagString: Untagged
@@ -4413,6 +4459,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 46396667338597890}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!65 &6254155223865904210
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560557053601721586}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 0}
+  m_Center: {x: 0, y: -0.00000011920929, z: 0}
 --- !u!1 &6593932093550288545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4424,6 +4491,7 @@ GameObject:
   - component: {fileID: 4894835964437983772}
   - component: {fileID: 4914560088276630888}
   - component: {fileID: 3340684803336865057}
+  - component: {fileID: 6593932093550288546}
   m_Layer: 0
   m_Name: GLTFNode1(frontwall)
   m_TagString: Untagged
@@ -4431,6 +4499,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &6593932093550288546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593932093550288545}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.00000023841858}
 --- !u!1 &7281216917606302554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4442,6 +4531,7 @@ GameObject:
   - component: {fileID: 4722710947343858250}
   - component: {fileID: 3872631230630078518}
   - component: {fileID: 8057145861050568205}
+  - component: {fileID: 8057145861050568206}
   m_Layer: 0
   m_Name: GLTFNode2(leftwall)
   m_TagString: Untagged
@@ -4515,6 +4605,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8057145861050568206
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281216917606302554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 0}
+  m_Center: {x: -0.00000011920929, y: 0, z: -0.00000047683716}
 --- !u!4 &8985257884276803100
 Transform:
   m_ObjectHideFlags: 0
@@ -4530,6 +4641,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 46396667338597890}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &8985257884276803101
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5779307007155845553}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 0}
+  m_Center: {x: 0.00000011920929, y: 0, z: -0.00000047683716}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

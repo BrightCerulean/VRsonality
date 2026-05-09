@@ -32,10 +32,24 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            ClearSavedPhotos();
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void ClearSavedPhotos()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            string path = System.IO.Path.Combine(
+                Application.persistentDataPath,
+                "playerimage_" + i + ".jpg"
+            );
+            if (System.IO.File.Exists(path))
+                System.IO.File.Delete(path);
         }
     }
 
