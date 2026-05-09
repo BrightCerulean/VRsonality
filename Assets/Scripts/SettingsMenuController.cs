@@ -149,7 +149,7 @@ public class SettingsMenuController : MonoBehaviour
     }*/
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y) || Input.GetButtonDown("js5"))
+        if (Input.GetKeyDown(KeyCode.Y) || Input.GetButtonDown("js3"))
         {
             Debug.Log("[Settings] Toggle triggered, isOpen=" + isOpen + ", canvas=" + settingsMenuCanvas);
             if (isOpen) CloseSettings();
