@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class SettingsMenuController : MonoBehaviour
 {
+    public static SettingsMenuController Instance;
+    private static string startScene;
+
     [Header("Settings Menu Canvas")]
     public GameObject settingsMenuCanvas;
 
@@ -67,14 +71,43 @@ public class SettingsMenuController : MonoBehaviour
     }
     private void Awake()
     {
-        if (Application.isEditor)//PC
+        if (Instance == null)
         {
+            Instance = this;
+            startScene = SceneManager.GetActiveScene().name;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (Application.isEditor)
             XButton = "js1";
-        }
-        else//Android
-        {
+        else
             XButton = "js2";
-        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        movementScript = FindFirstObjectByType<Teleporting>();
+        raycastScript = FindFirstObjectByType<RayCast>();
+        menuController = FindFirstObjectByType<MenuController>();
+        joystickMovement = FindFirstObjectByType<JoystickMovement>();
+        inventoryPanel = FindFirstObjectByType<InventoryPanel>();
+
+        if (isOpen) CloseSettings();
     }
 
     /*void Update()
@@ -118,6 +151,7 @@ public class SettingsMenuController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y) || Input.GetButtonDown("js5"))
         {
+            Debug.Log("[Settings] Toggle triggered, isOpen=" + isOpen + ", canvas=" + settingsMenuCanvas);
             if (isOpen) CloseSettings();
             else OpenSettings();
             return;
@@ -235,11 +269,43 @@ public class SettingsMenuController : MonoBehaviour
 
     void ActionRestart()
     {
+        StartCoroutine(RestartCoroutine());
+    }
+
+    private IEnumerator RestartCoroutine()
+    {
         Debug.Log("[Settings] Restart");
+        isOpen = false;
+        if (settingsMenuCanvas != null) settingsMenuCanvas.SetActive(false);
         if (GameManager.Instance != null)
             GameManager.Instance.ResetSelections();
-        CloseSettings();
-        SceneManager.LoadScene("gamestart");
+
+        PlayerAvatar myAvatar = FindFirstObjectByType<PlayerAvatar>();
+        if (myAvatar != null && myAvatar.photonView.IsMine)
+            PhotonNetwork.Destroy(myAvatar.gameObject);
+
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+            float timeout = 3f;
+            while (PhotonNetwork.InRoom && timeout > 0)
+            {
+                timeout -= Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        GameObject rig = GameObject.Find("XRCardboardRig");
+        if (rig != null)
+        {
+            rig.transform.SetParent(null);
+            SceneManager.MoveGameObjectToScene(rig, SceneManager.GetActiveScene());
+        }
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.TransitionToScene(startScene);
+        else
+            SceneManager.LoadScene(startScene);
     }
 
     void ActionInventory()
