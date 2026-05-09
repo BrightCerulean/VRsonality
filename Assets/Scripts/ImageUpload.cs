@@ -120,7 +120,7 @@ public class ImageUpload : MonoBehaviourPun
         byte[] bytes = tex.EncodeToJPG();
         File.WriteAllBytes(savedImagePaths[index], bytes);
 
-        photonView.RPC("RPC_ReceiveImage", RpcTarget.Others, bytes, index);
+        //photonView.RPC("RPC_ReceiveImage", RpcTarget.Others, bytes, index);
 
         currentImageIndex++;
         StartCoroutine(ShowMessage("Photo " + currentImageIndex + " uploaded successfully!"));
